@@ -12,12 +12,20 @@ function WHomePage() {
 	return (
 		<>
 			<section className="heading">
-				<h1 className="title">Warehouses</h1>
-				<search className="search">
-					<input type="search" name="" id="" />
-					<img src={searchIcon} alt="Add warehouse" className="search__icon" />
-				</search>
-				<button className="button-add">+ Add New Warehouse</button>
+				<h1 className="heading__title">Warehouses</h1>
+				<form className="search">
+					<input type="search" className="search__input" name="search_input" id="search_input" placeholder="Search..."/>
+					<button className="search__button" type="submit">
+						<img
+							src={searchIcon}
+							alt="Add warehouse"
+							className="search__icon"
+						/>
+					</button>
+				</form>
+				<button className="button-add">
+					<h3 className="button-add__text">+ Add New Warehouse</h3>
+				</button>
 			</section>
 			<section className="warehouse-list">
 				{warehouses.map((warehouse) => (
