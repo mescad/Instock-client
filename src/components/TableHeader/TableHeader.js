@@ -5,12 +5,13 @@ function TableHeader({ tableSetting }) {
 	return (
 		<section className="table-header">
 			<div className="table-header__wrapper">
-				{tableSetting.map((headerSetting) => (
+				{tableSetting.map((headerSetting, index) => (
 					<div
 						className="table-header__single-wrapper"
 						style={{
 							"--tablet-width": headerSetting.width,
 						}}
+						key={index}
 					>
 						<h4 className="table-header__name">{headerSetting.name}</h4>
 						<div className="table-header__sort-wrapper">
