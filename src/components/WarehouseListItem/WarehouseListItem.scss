@@ -1,0 +1,100 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.warehouse {
+	@include topDivider;
+	padding: 1.6rem 2.4rem 2.4rem 2.4rem;
+
+	&:first-child {
+		@include tablet {
+			border-top: none;
+		}
+	}
+
+	@include tablet {
+		display: flex;
+		padding: 0rem 1.5rem;
+	}
+
+    @include desktop {
+		padding: 0rem 2.3rem;
+	}
+
+	&__summary-wrapper {
+		display: flex;
+
+		@include tablet {
+			width: 85%;
+		}
+	}
+
+	&__left-data-wrapper {
+		width: 40%;
+
+		@include tablet {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	&__right-data-wrapper {
+		width: 60%;
+
+		@include tablet {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	&__table-btn-wrapper {
+		display: flex;
+		justify-content: space-between;
+
+		@include tablet {
+			width: 15%;
+			justify-content: center;
+			padding-left: 1.7rem;
+		}
+	}
+
+	&__data-wrapper {
+		padding-bottom: 1.6rem;
+
+		@include tablet {
+			padding: 1.6rem 1.7rem;
+			width: 50%;
+		}
+
+		&--contact-name {
+			@include tablet {
+				width: 45%;
+			}
+		}
+
+		&--contact-way {
+			@include tablet {
+				width: 55%;
+			}
+		}
+	}
+
+	&__nane-wrapper {
+		display: flex;
+
+		@include tablet {
+			justify-content: flex-start;
+		}
+	}
+
+	&__name {
+		color: $primary-alternative;
+	}
+
+	&__label {
+		margin-bottom: 0.4rem;
+
+		@include tablet {
+			display: none;
+		}
+	}
+}

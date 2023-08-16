@@ -7,6 +7,11 @@
 	top: 13.6rem;
     width: 100%;
 
+    &__center-wrapper{
+        margin: auto;
+        max-width: 105.2rem;
+    }
+
 	&__wrapper {
 		box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
 		border-radius: 3px;
@@ -16,11 +21,7 @@
 
 		@include tablet {
 			margin: 0px 3.2rem;
-            // width: 100%;
+            max-width: 102rem;
 		}
-
-        @include desktop {
-            @include centerSectionWrapper;
-        }
 	}
 }

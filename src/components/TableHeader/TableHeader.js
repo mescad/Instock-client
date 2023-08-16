@@ -1,16 +1,18 @@
 import "./TableHeader.scss";
 import sortIcon from "../../asset/Icons/sort-24px.svg";
 
-function TableHeader({ headerNames }) {
+function TableHeader({ tableSetting }) {
 	return (
 		<section className="table-header">
 			<div className="table-header__wrapper">
-				{headerNames.map((headerName) => (
+				{tableSetting.map((headerSetting) => (
 					<div
 						className="table-header__single-wrapper"
-						style={{ "--noOfHeader": headerNames.length }}
+						style={{
+							"--tablet-width": headerSetting.width,
+						}}
 					>
-						<h4 className="table-header__name">{headerName}</h4>
+						<h4 className="table-header__name">{headerSetting.name}</h4>
 						<div className="table-header__sort-wrapper">
 							<button className="table-header__sort-btn">
 								<img
