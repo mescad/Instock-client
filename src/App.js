@@ -9,10 +9,12 @@ function App() {
 		<BrowserRouter>
 			<Header />
 			<main className="main">
-				<Routes>
-					<Route path="/" element={<WHomePage />} />
-					<Route />
-				</Routes>
+				<div className="main__wrapper">
+					<Routes>
+						<Route path="/" element={<WHomePage />} />
+						<Route />
+					</Routes>
+				</div>
 			</main>
 			<Footer />
 		</BrowserRouter>

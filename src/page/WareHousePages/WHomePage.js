@@ -6,6 +6,8 @@ import chevronIcon from "../../asset/Icons/chevron_right-24px.svg";
 import warehouseData from "../../asset/data/warehouses.json";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import TableHeader from "../../components/TableHeader/TableHeader";
+
 
 function WHomePage() {
 	const [warehouses, setWarehouses] = useState(warehouseData);
@@ -13,21 +15,32 @@ function WHomePage() {
 		<>
 			<section className="heading">
 				<h1 className="heading__title">Warehouses</h1>
-				<form className="search">
-					<input type="search" className="search__input" name="search_input" id="search_input" placeholder="Search..."/>
-					<button className="search__button" type="submit">
-						<img
-							src={searchIcon}
-							alt="Add warehouse"
-							className="search__icon"
+				<div className="heading__right-wrapper">
+					<form className="search">
+						<input
+							type="search"
+							className="search__input"
+							name="search_input"
+							id="search_input"
+							placeholder="Search..."
 						/>
+						<button className="search__button" type="submit">
+							<img
+								src={searchIcon}
+								alt="Add warehouse"
+								className="search__icon"
+							/>
+						</button>
+					</form>
+					<button className="button-add">
+						<h3 className="button-add__text">+ Add New Warehouse</h3>
 					</button>
-				</form>
-				<button className="button-add">
-					<h3 className="button-add__text">+ Add New Warehouse</h3>
-				</button>
+				</div>
 			</section>
 			<section className="warehouse-list">
+                <section className="warehouse-list__table-header">
+                    <TableHeader headerNames={["WAREHOUSE", "ADDRESS", "CONTACT NAME", "CONTACT INFORMATION"]}/>
+                </section>
 				{warehouses.map((warehouse) => (
 					<article className="warehouse" key={warehouse.id}>
 						<div className="warehouse__summary-wrapper">
