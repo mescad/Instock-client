@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<WDetail/>}/>
         <Route />
+        <Route path="/warehouses/:id" element={<WDetail/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

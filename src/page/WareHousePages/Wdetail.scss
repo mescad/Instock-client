@@ -1,0 +1,9 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+
+
+.wdetail__wrapper{
+    padding: 0rem 1.6rem;
+}

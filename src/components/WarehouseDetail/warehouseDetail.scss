@@ -3,5 +3,69 @@
 @use "../../styles/partials/typography";
 @use "../../styles/partials/resets" as *;
 
+.details__top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2.4rem 0rem;
+  align-items: center;
 
+  &-group {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    align-items: center;
+  }
+}
 
+.details__bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.details {
+  &__section {
+    display: flex;
+    flex-direction: row;
+    padding-top: 2.4rem;
+    padding-bottom: 1.6rem;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    &--top {
+      width: 50%;
+    }
+  }
+
+  &__action {
+    &-back {
+      background-image: url(../../asset/Icons/arrow_back-24px.svg);
+      background-repeat: no-repeat;
+      width: 2.4rem;
+      height: 2.4rem;
+      background-color: white;
+      background-position: center;
+      border: none;
+    }
+
+    &-edit {
+      
+        background-color: $primary-alternative;
+        width: 3.6rem;
+        height: 3.6rem;
+        padding: 0.8rem;
+        background-image: url("../../asset/Icons/edit-24px-white.svg");
+      
+
+     
+      background-position: center;
+      background-repeat: no-repeat;
+      border: none;
+      border-radius: 2rem;
+    }
+  }
+}

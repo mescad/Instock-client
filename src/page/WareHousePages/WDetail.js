@@ -1,21 +1,52 @@
-import warehouseData from "../../asset/data/warehouses.json";
-import inventoryData from "../../asset/data/inventories.json";
 import WarehouseDetail from "../../components/WarehouseDetail/warehouseDetail";
 import WarehouseInventory from "../../components/WarehouseInventory/warehouseInventory";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import "./WDetail.scss";
 
 function WDetail() {
-  const [currentWarehouse, setCurrentWarehouse] = useState(warehouseData[0]);
-  //const [isLoading, setIsLoading] = useState(true)
+  const [currentWarehouse, setCurrentWarehouse] = useState(null);
+  const [currentInventory, setCurrentInventory] = useState(null);
+  const [isLoadingDetails, setIsLoadingDetails] = useState(true);
+  const [isLoadingInventory, setIsLoadingInventory] = useState(true);
 
-  const currentInventory = inventoryData.filter(
-    (e) => e.warehouse_id === currentWarehouse.id
-  );
 
-  
+
+  const params = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/warehouses/${params.id}`)
+      .then((response) => {
+        setCurrentWarehouse(response.data);
+        setIsLoadingDetails(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      // eslint-disable-next-line
+  },[]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/warehouses/${params.id}/inventories`)
+      .then((response) => {
+        setCurrentInventory(response.data);
+        setIsLoadingInventory(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      // eslint-disable-next-line
+  },[]);
+
+  if (isLoadingDetails || isLoadingInventory) {
+    return <h1> Checking pages</h1>;
+  }
 
   return (
-    <section>
+    <section className="wdetail__wrapper">
       <WarehouseDetail
         key={currentWarehouse.warehouse_id}
         address={currentWarehouse.address}
@@ -23,6 +54,7 @@ function WDetail() {
         name={currentWarehouse.contact_name}
         phone={currentWarehouse.contact_phone}
         email={currentWarehouse.contact_email}
+        warehouseName={currentWarehouse.warehouse_name}
       />
 
       {currentInventory.map((item) => {
