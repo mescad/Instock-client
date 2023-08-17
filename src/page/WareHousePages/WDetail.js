@@ -3,7 +3,7 @@ import WarehouseInventory from "../../components/WarehouseInventory/warehouseInv
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "./WDetail.scss";
+import "./Wdetail.scss";
 
 function WDetail() {
   const [currentWarehouse, setCurrentWarehouse] = useState(null);

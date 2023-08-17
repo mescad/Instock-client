@@ -3,6 +3,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import WHomePage from "./page/WareHousePages/WHomePage";
+import WDetail from "./page/WareHousePages/WDetail"
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 								<Routes>
 									<Route path="/" element={<WHomePage />} />
 									<Route path="/warehouses" element={<WHomePage />} />
+									<Route path="/warehouses/:id" element={<WDetail/>}/>
 									<Route />
 								</Routes>
 							</div>
