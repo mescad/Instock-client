@@ -28,10 +28,10 @@ function WHomePage() {
 			width: "33%",
 		},
 	];
-
+	
 	useEffect(() => {
 		axios
-			.get("http://localhost:8080/api/warehouses")
+			.get(`${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_PORT}/api/warehouses`)
 			.then((res) => {
 				setIsLoading(false);
 				setWarehouses(res.data);
