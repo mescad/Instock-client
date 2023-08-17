@@ -13,6 +13,7 @@ function App() {
 					<div className="main__wrapper">
 						<Routes>
 							<Route path="/" element={<WHomePage />} />
+							<Route path="/warehouses" element={<WHomePage />} />
 							<Route />
 						</Routes>
 					</div>

@@ -51,7 +51,6 @@ function WHomePage() {
 				<h1 className="heading__title">Warehouses</h1>
 				<div className="heading__right-wrapper">
 					<SearchBar />
-					{/* TODO confirm add new warehouse url */}
 					<Link to="/warehouses/add">
 						<ButtonAdd buttonText={"+ Add New Warehouse"} />
 					</Link>

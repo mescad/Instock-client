@@ -11,8 +11,6 @@ function WarehouseListItem({ warehouse, tableSetting }) {
 				<div className="warehouse__left-data-wrapper">
 					<div className="warehouse__data-wrapper">
 						<h4 className="warehouse__label">{tableSetting[0].name}</h4>
-						{/* TODO warehouse data has no id */}
-						{/* TODO confirm warehouse details page link */}
 						<Link
 							to={`/warehouses/${warehouse.id}`}
 							className="warehouse__nane-wrapper"
@@ -50,7 +48,6 @@ function WarehouseListItem({ warehouse, tableSetting }) {
 				<button className="warehouse__btn" >
 					<img src={deleteIcon} alt="Delete warehouse" />
 				</button>
-				{/* TODO confirm warehouse edit page link */}
 				<Link to={`/warehouses/${warehouse.id}/edit`}>
 					<button className="warehouse__btn">
 						<img src={editIcon} alt="Edit warehouse" />
