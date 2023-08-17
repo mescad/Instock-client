@@ -1,0 +1,53 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/typography' as *;
+
+.section-title-wrapper__title {
+  display: inline-block;
+  padding-left: 1.5rem;
+}
+
+.form {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  border-radius: 15px;
+  height: 3rem;
+}
+
+.text-area {
+  height: 10rem;
+  font-family: 'TitilliumWeb';
+}
+
+.wrapper-to-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  .button {
+    width: 45%;
+    height: 3.6rem;
+    margin-top: 3rem;
+    border-radius: 18px;
+    border: 1px solid #bdc5d5;
+    background-color: $primary-light;
+
+    &--blue {
+      background-color: $primary-alternative;
+      color: $primary-light;
+      border: none;
+    }
+  }
+}
