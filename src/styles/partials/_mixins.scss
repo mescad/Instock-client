@@ -1,18 +1,16 @@
-@use './variables' as *;
+@use "./variables" as *;
 
-@mixin tablet{
-    @media screen and (min-width: $tablet-breakpoint){
-        @content;
-    }
+@mixin tablet {
+	@media screen and (min-width: $tablet-breakpoint) {
+		@content;
+	}
 }
 
-
-@mixin desktop{
-    @media screen and (min-width: $desktop-breakpoint){
-        @content;
-    }
+@mixin desktop {
+	@media screen and (min-width: $desktop-breakpoint) {
+		@content;
+	}
 }
-
 
 @mixin bodySmall {
 	font-size: 1.1rem;
@@ -34,18 +32,8 @@
 		font-size: 1.6rem;
 		line-height: 2.8rem;
 	}
-}
-
-@mixin centerSectionWrapper {
-	max-width: $desktop-breakpoint;
-	margin: auto;
-}
+} 
 
 @mixin topDivider {
     border-top: 1px solid #BDC5D5;
 }
-
-
-
-
-
