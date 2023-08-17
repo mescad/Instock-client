@@ -1,14 +1,19 @@
 import './WAddPage.scss';
-import formComponent from '../../components/EditWareshouse/EditWarehouse.js';
+
+import EditWarehouse from '../../components/EditWareshouse/EditWarehouse.js';
 
 function WAddPage() {
+  const handleForm = () => {
+
+  }
+
   return (
-    <>
-      <h1>Add New Warehouse</h1>
+    <main className='add-new-warehouse'>
+      <h1 className='add-new-warehouse__title'>Add New Warehouse</h1>
       <section>
-       <formComponent page={`add-new-warehouse`} buttonText={"Save"}/>
+      <EditWarehouse buttonText={`+ Add Warehouse`} page={`add-new-warehouse`} handleForm={handleForm}/>
       </section>
-    </>
+    </main>
   );
 }
 

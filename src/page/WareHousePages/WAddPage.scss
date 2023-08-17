@@ -1,0 +1,35 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.add-new-warehouse {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $secondary-alternative;
+    border-radius: 4px;
+    margin: 1.6rem 1.6rem;
+
+    &__title {
+        
+        margin: 3.2rem 1.6rem 2.4rem ;
+    }
+
+    &__button {
+        height: 3.6rem;
+        width: 12rem;
+        border-radius: 20px;
+
+
+
+        &--submit {
+            background-color: $primary-alternative;
+            color: $primary-light;
+            border-style: none;
+        }
+
+        
+    }
+
+
+}
+
+// button needs to be different
