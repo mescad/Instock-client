@@ -1,14 +1,36 @@
 @use "./styles/partials/mixins" as *;
 
-.main {
-	position: absolute;
-	top: 13.6rem;
-    width: 100%;
 
-    &__center-wrapper{
-        margin: auto;
-        max-width: 105.2rem;
-    }
+.page__wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	@include tablet {
+		min-height: 102.4rem;
+	}
+
+	@include desktop {
+		min-height: 92.5rem;
+	}
+}
+
+.page__top-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.main {
+	margin-top: -8rem;
+
+	@include tablet {
+		margin-top: -12rem;
+	}
+
+	&__center-wrapper {
+		margin: auto;
+		max-width: 105.2rem;
+	}
 
 	&__wrapper {
 		box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
@@ -16,10 +38,11 @@
 		background-color: #fff;
 		margin: 0px 1.6rem;
 		border-radius: 3px;
+		height: 120%;
 
 		@include tablet {
 			margin: 0px 3.2rem;
-            max-width: 102rem;
+			max-width: 102rem;
 		}
 	}
 }

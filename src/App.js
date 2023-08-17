@@ -7,19 +7,23 @@ import WHomePage from "./page/WareHousePages/WHomePage";
 function App() {
 	return (
 		<BrowserRouter>
-			<Header />
-			<main className="main">
-				<div className="main__center-wrapper">
-					<div className="main__wrapper">
-						<Routes>
-							<Route path="/" element={<WHomePage />} />
-							<Route path="/warehouses" element={<WHomePage />} />
-							<Route />
-						</Routes>
-					</div>
+			<div className="page__wrapper">
+				<div className="page__top-wrapper">
+					<Header />
+					<main className="main">
+						<div className="main__center-wrapper">
+							<div className="main__wrapper">
+								<Routes>
+									<Route path="/" element={<WHomePage />} />
+									<Route path="/warehouses" element={<WHomePage />} />
+									<Route />
+								</Routes>
+							</div>
+						</div>
+					</main>
 				</div>
-			</main>
-			<Footer />
+				<Footer />
+			</div>
 		</BrowserRouter>
 	);
 }
