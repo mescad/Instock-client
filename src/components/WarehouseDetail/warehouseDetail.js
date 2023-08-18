@@ -1,5 +1,8 @@
 import "./warehouseDetail.scss";
 import { Link } from "react-router-dom";
+import editImage from "../../asset/Icons/edit-24px-white.svg"
+import backImage from "../../asset/Icons/arrow_back-24px.svg"
+import ButtonEditTablet from "../ButtonEditTablet/buttonEditTablet";
 
 function warehouseDetail({id, city, country, name, address, position, phone, email, warehouseName }) {
   return (
@@ -10,14 +13,15 @@ function warehouseDetail({id, city, country, name, address, position, phone, ema
 
         <div className="details__leftgroup"> 
         <Link to={'/warehouses'}> 
-        <button className="details__button-back"> </button>
+        <button className="details__button-back"><img alt="back_page" src={backImage}/> </button>
         </Link>
         <h1>{warehouseName}</h1>
         </div>
         <Link to={`/warehouses/${id}/edit`}> 
         <button className="details__button-edit">
-          <img alt="edit_warehouse" url="../../asset/Icons/edit-24px.svg"/>
-        </button></Link>
+          <img alt="edit_warehouse" src={editImage}/>
+        </button>
+        <ButtonEditTablet/></Link>
       </section>
 
 
