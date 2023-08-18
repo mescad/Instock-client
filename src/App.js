@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import addInventoryItem from './page/ItemPages/ItemAddPage';
+import AddInventoryItem from './page/ItemPages/ItemAddPage';
 import WHomePage from './page/WareHousePages/WHomePage';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
                   <Route path="/warehouses" element={<WHomePage />} />
                   <Route
                     path="/inventories/add"
-                    element={<addInventoryItem />}
+                    element={<AddInventoryItem />}
                   />
                 </Routes>
               </div>
