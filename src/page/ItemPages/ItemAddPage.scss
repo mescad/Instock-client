@@ -140,6 +140,11 @@
       margin: 1.6rem 1rem;
     }
 
+    &--link {
+      text-align: center;
+      padding-top: 0.3rem;
+    }
+
     &--blue {
       background-color: $primary-alternative;
       color: $primary-light;
@@ -151,4 +156,8 @@
       }
     }
   }
+}
+
+.sourprise {
+  display: none;
 }

@@ -1,10 +1,21 @@
 import './ItemAddPage.scss';
 import arrowBack from '../../asset/Icons/arrow_back-24px.svg';
 import axios from 'axios';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 function AddInventoryItem() {
+  const [display, setDisplay] = useState(false);
+
+  const specialClass = 'input input--quantity';
+  const meanClass = 'sourprise';
+
+  function handleChange() {
+    setDisplay(true);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -31,8 +42,6 @@ function AddInventoryItem() {
       warehouse_id: parseInt(form.warehouseId.value)
     };
 
-    console.log(newItem);
-
     axios
       .post(`${DOMAIN}:${PORT}/api/inventories`, newItem)
       .then(res => {
@@ -43,9 +52,6 @@ function AddInventoryItem() {
       });
   }
 
-  function resetFormInput(e) {
-    e.preventDefault();
-  }
   return (
     <section className="section">
       <div className="section-title-wrapper">
@@ -96,22 +102,35 @@ function AddInventoryItem() {
               <h3 className="wrapper__second-title">Status</h3>
               <div className="wrapper-to-flex">
                 <label>
-                  <input type="radio" name="status" value={'In Stock'} />
+                  <input
+                    onChange={handleChange}
+                    type="radio"
+                    name="status"
+                    value={'In Stock'}
+                  />
                   In stock
                 </label>
                 <label>
-                  <input type="radio" name="status" value={'Out of Stock'} />
+                  <input
+                    onChange={e => {
+                      handleChange(e);
+                    }}
+                    defaultChecked={display === false}
+                    type="radio"
+                    name="status"
+                    value={'Out of Stock'}
+                  />
                   Out of stock
                 </label>
               </div>
 
               <div className="display-only-if-in-stock">
-                <label>
+                <label className={!display ? meanClass : ''}>
                   Quantity
                   <input
                     name="quantity"
                     type="number"
-                    className="input input--quantity"
+                    className={!display ? meanClass : specialClass}
                     placeholder="0"
                   />
                 </label>
@@ -133,14 +152,9 @@ function AddInventoryItem() {
             </div>
           </div>
           <div className="button-wrapper">
-            <button
-              onClick={e => {
-                resetFormInput(e);
-              }}
-              className="button"
-            >
+            <Link to={'/inventories'} className="button button--link">
               Cancel
-            </button>
+            </Link>
             <button type="submit" className="button button--blue">
               + Add Item
             </button>
