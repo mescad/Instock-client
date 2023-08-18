@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import WEditPage from "./page/WareHousePages/WEditPage";
 import WAddPage from "./page/WareHousePages/WAddPage";
 import WHomePage from "./page/WareHousePages/WHomePage";
+import ItemDetailPage from "./page/ItemPages/ItemDetailPage";
 import WDetail from "./page/WareHousePages/WDetail";
 import ItemHomePage from "./page/ItemPages/ItemHomePage";
 import AddInventoryItem from "./page/ItemPages/ItemAddPage";
@@ -38,6 +39,10 @@ function App() {
                   <Route
                     path="/warehouses/add"
                     element={<WAddPage action="post" />}
+                  />
+                  <Route
+                    path="/inventories/:itemId"
+                    element={<ItemDetailPage />}
                   />
                 </Routes>
               </div>
