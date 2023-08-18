@@ -42,8 +42,8 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
   const c = "component";
   return (
     <form onSubmit={handleForm} className={`${page}__form `}>
-      <section>
-        <article className={`${c}__article `}>
+      <section className={`${c}__section-wrapper`}>
+        <article className={`${c}__article ${c}__article-1 `}>
           <h2 className={`${c}__subtitle`}>Warehouse Details</h2>
 
           <label className={`${c}__label`} htmlFor="warehouse_name">
@@ -89,7 +89,7 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
             placeholder="Country"
           />
         </article>
-        <article className={`${c}__article`}>
+        <article className={`${c}__article ${c}__article-2`}>
           <h2 className={`${c}__subtitle`}>Contact Details</h2>
 
           <label className={`${c}__label`} htmlFor="">

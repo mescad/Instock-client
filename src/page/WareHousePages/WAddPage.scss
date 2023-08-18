@@ -18,7 +18,16 @@
     &__wrapper-title {
         display: flex;
         align-items: center;
-        margin-left: 1.6rem;
+        padding-left: 1.6rem;
+        border-bottom: 1px solid $secondary-alternative;
+
+        @include tablet {
+            padding-left: 3.2rem;
+        }
+
+        @include desktop {
+            padding-left: 4rem;
+        }
     }
 
     &__button {
@@ -34,6 +43,10 @@
             border-style: none;
             font-size: 1.3rem;
             font-family: "TitilliumWeb";
+
+            @include tablet {
+                width: 14rem;
+            }
         }
 
         

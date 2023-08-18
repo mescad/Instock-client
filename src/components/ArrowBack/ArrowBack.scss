@@ -1,4 +1,5 @@
-
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
 
 .arrow-back {
     background-image: url("../../asset/Icons/arrow_back-24px.svg");
@@ -11,4 +12,6 @@
     border: none;
     margin-top: 1rem;
     margin-right: 0.8rem;
+
+    
 }
