@@ -5,5 +5,18 @@
 
 
 .wdetail__wrapper{
-    padding: 0rem 1.6rem;
+    
+
+    @include tablet{
+        padding: 0rem 0rem;
+        max-width: 102rem;
+    }
+}
+
+.wdetail__sorter{
+    display: none;
+
+    @include tablet{
+        display: flex;
+    }
 }

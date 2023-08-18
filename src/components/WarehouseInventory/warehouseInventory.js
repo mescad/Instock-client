@@ -1,59 +1,69 @@
 import "./warehouseInventory.scss";
+import { Link } from "react-router-dom";
+import chevronIcon from "../../asset/Icons/chevron_right-24px.svg";
 
-function warehouseInventory({ name, status, quantity, category }) {
-  
-  console.log(status)
+function warehouseInventory({ id, name, status, quantity, category, tableSetting }) {
+  console.log(status);
 
-  let inStock= null
-
-  // if (status==='In Stock'){
-  //   return inStock===true} else{
-  //     return inStock===false
-  //   }
-  
-  
   return (
-
-    
     <section className="item">
-      
-
-      <div className="item__box">  
-      <div className="item__section">
+      <div className="item__wrapper">
         
-        <div className="item__group">
-          <h4> INVENTORY ITEM</h4>
-          <h3>{name} </h3>
-        </div>
+        <section className="item__section item__section-left">
+          <div className="item__group item__group-1">
+            <h4 className="item__label"> {tableSetting[0].name}</h4>
 
-        <div className="item__group">
-          <h4>CATEGORY </h4>
-          <p>{category}</p>
-        </div>
+          <Link to={`/inventories/${id}`} className="item__name-wrapper">  
+            <p className="item__name">{name} </p>
+            <img
+								src={chevronIcon}
+								alt="Go to warehouse details"
+								className="warehouse__go-to-icon"
+							/>
+              </Link>
 
-        
+          </div>
+
+          <div className="item__group item__group-2">
+            <h4 className="item__label"> {tableSetting[1].name} </h4>
+            <p>{category}</p>
+          </div>
+        </section>
+
+        <section className="item__section item__section-right">
+          <div className="item__group item__group-3">
+            <h4 className="item__label"> {tableSetting[2].name} </h4>
+            <div
+              className={
+                status === "In Stock" ? "item__status-green" : "item__status-red"
+              }
+            >
+              {" "}
+              <h4
+                className={
+                  status === "In Stock"
+                    ? "item__status-button-green"
+                    : "item__status-button-red"
+                }
+              >
+                {status}
+              </h4>
+            </div>
+          </div>
+
+          <div className="item__group item__group-4">
+            <h4 className="item__label">  {tableSetting[3].name}</h4>
+            <p> {quantity}</p>
+          </div>
+        </section>
+
       </div>
-      
 
-      <div className="item__section">
-      <div className="item__group">
-          <h4>STATUS </h4>
-          <h4 className={ status == "In Stock" ? "item__status-green" : "item__status-red"}>{status}</h4>
-        </div>
-
-        <div className="item__group">
-          <h4> QTY</h4>
-          <p> {quantity}</p>
-        </div>
-      </div>
-
-      </div>
-
-      <div className="item__section">
-        <div className="item__group item__group-buttons">
-          <button className="item__group-buttons--delete"></button>
-          <button className="item__group-buttons--edit"></button>
-        </div>
+      <div className="item__buttongroup">
+        <button className="item__buttongroup--delete"></button>
+        <Link to={`/inventories/${id}/edit`}> 
+        <button className="item__buttongroup--edit"></button>
+        </Link>
       </div>
     </section>
   );

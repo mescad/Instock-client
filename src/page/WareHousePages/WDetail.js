@@ -4,13 +4,32 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Wdetail.scss";
+import WInventoryHeader from "../../components/WInventoryHeader/WInventoryHeader";
 
 function WDetail() {
   const [currentWarehouse, setCurrentWarehouse] = useState(null);
   const [currentInventory, setCurrentInventory] = useState(null);
   const [isLoadingDetails, setIsLoadingDetails] = useState(true);
   const [isLoadingInventory, setIsLoadingInventory] = useState(true);
-
+  const tableSetting = [
+		{
+			name: "INVENTORY ITEM",
+			width: "30%",
+		},
+		{
+			name: "CATEGORY",
+			width: "20%",
+		},
+		{
+			name: "STATUS",
+			width: "27%",
+		},
+		{
+			name: "QUANTITY",
+			width: "23%",
+		},
+	];
+	
 
 
   const params = useParams();
@@ -55,16 +74,24 @@ function WDetail() {
         phone={currentWarehouse.contact_phone}
         email={currentWarehouse.contact_email}
         warehouseName={currentWarehouse.warehouse_name}
+        city={currentWarehouse.city}
+        country={currentWarehouse.country}
       />
+
+       <div className="wdetail__sorter"> 
+      <WInventoryHeader tableSetting={tableSetting}/>
+      </div>
 
       {currentInventory.map((item) => {
         return (
           <WarehouseInventory
             key={item.id}
+            id={item.id}
             name={item.item_name}
             category={item.category}
             status={item.status}
             quantity={item.quantity}
+            tableSetting={tableSetting}
           />
         );
       })}
