@@ -77,15 +77,17 @@ function ItemHomePage() {
 				<div className="inventory__wrapper">
 					{inventories.map((inventory) => (
 						<InventoryListItem
-                        key={inventory.id}
-                        id={inventory.id}
-                        name={inventory.item_name}
-                        category={inventory.category}
-                        status={inventory.status}
-                        quantity={inventory.quantity}
-                        warehouse={inventory.warehouse_name}
-                        tableSetting={tableSetting}
-                      />
+							key={inventory.id}
+							id={inventory.id}
+							name={inventory.item_name}
+							category={inventory.category}
+							status={inventory.status}
+							quantity={inventory.quantity}
+							warehouse={inventory.warehouse_name}
+							tableSetting={tableSetting}
+							refreshTableFunc={refreshTableFunc}
+							setDisplayDeleteModal={setDisplayDeleteModal}
+						/>
 					))}
 				</div>
 			</section>

@@ -1,6 +1,7 @@
 import "./InventoryListItem.scss";
 import { Link } from "react-router-dom";
 import chevronIcon from "../../asset/Icons/chevron_right-24px.svg";
+import ModalDelete from "../../components/ModalDelete/ModalDelete"
 
 function InventoryListItem({
   id,
@@ -10,7 +11,22 @@ function InventoryListItem({
   category,
   warehouse,
   tableSetting,
+  refreshTableFunc, 
+	setDisplayDeleteModal,
 }) {
+  const displayDeleteModal = () => {   
+		setDisplayDeleteModal([  // add setDisplayDeleteModal
+			<ModalDelete
+				deleteName={name}
+				deleteType="inventory"
+				id={id}
+				setDisplayDeleteModal={setDisplayDeleteModal}
+				refreshTableFunc={refreshTableFunc}
+				key="1"
+			/>,
+		]);
+	};
+
   return (
     <section className="item">
       <div className="item__wrapper">
@@ -68,7 +84,7 @@ function InventoryListItem({
       </div>
 
       <div className="item__buttongroup">
-        <button className="item__buttongroup--delete"></button>
+        <button className="item__buttongroup--delete" onClick={displayDeleteModal}></button>
         <Link to={`/inventories/${id}/edit`}>
           <button className="item__buttongroup--edit"></button>
         </Link>
