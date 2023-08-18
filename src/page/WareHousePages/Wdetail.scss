@@ -1,0 +1,22 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+
+
+.wdetail__wrapper{
+    
+
+    @include tablet{
+        padding: 0rem 0rem;
+        max-width: 102rem;
+    }
+}
+
+.wdetail__sorter{
+    display: none;
+
+    @include tablet{
+        display: flex;
+    }
+}

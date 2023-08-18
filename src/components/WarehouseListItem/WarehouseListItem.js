@@ -8,6 +8,7 @@ function WarehouseListItem({ warehouse, tableSetting }) {
 	return (
 		<article className="warehouse" key={warehouse.id}>
 			<div className="warehouse__summary-wrapper">
+				
 				<div className="warehouse__left-data-wrapper">
 					<div className="warehouse__data-wrapper">
 						<h4 className="warehouse__label">{tableSetting[0].name}</h4>
@@ -28,6 +29,7 @@ function WarehouseListItem({ warehouse, tableSetting }) {
 						<p className="warehouse__address">{`${warehouse.address}, ${warehouse.city}, ${warehouse.country}`}</p>
 					</div>
 				</div>
+
 				<div className="warehouse__right-data-wrapper">
 					<div className="warehouse__data-wrapper warehouse__data-wrapper--contact-name">
 						<h4 className="warehouse__label">{tableSetting[2].name}</h4>
