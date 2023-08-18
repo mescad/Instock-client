@@ -4,13 +4,21 @@
 .add-new-warehouse {
     display: flex;
     flex-direction: column;
-    border: 1px solid $secondary-alternative;
+    
     border-radius: 4px;
     margin: 1.6rem 1.6rem;
 
     &__title {
+        font-size: 2.4rem;
+        margin: 3.2rem 0 2.4rem 0rem ;
+        font-weight: 600;
         
-        margin: 3.2rem 1.6rem 2.4rem ;
+    }
+
+    &__wrapper-title {
+        display: flex;
+        align-items: center;
+        margin-left: 1.6rem;
     }
 
     &__button {
@@ -24,6 +32,8 @@
             background-color: $primary-alternative;
             color: $primary-light;
             border-style: none;
+            font-size: 1.3rem;
+            font-family: "TitilliumWeb";
         }
 
         

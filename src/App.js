@@ -15,8 +15,8 @@ function App() {
       <Header />
       <Routes>
         <Route />
-        <Route path="/warehouses/:warehousesId/edit" element={<WEditPage />}  />
-        <Route path="/warehouses/add" element={<WAddPage />}  />
+        <Route path="/warehouses/:warehousesId/edit" element={<WEditPage action="put" />}  />
+        <Route path="/warehouses/add" element={<WAddPage action="post"/>}  />
       </Routes>
       <Footer />
     </BrowserRouter>

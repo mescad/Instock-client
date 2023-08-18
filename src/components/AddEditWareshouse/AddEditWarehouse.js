@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./EditWarehouse.scss";
+import "./AddEditWarehouse.scss";
+const PORT = process.env.REACT_APP_PORT;
+const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
-function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
-  // const [warehouseDetails, setWarehouseDetails] = useState({})
-  // const [contactDetails, setContactDetails] = useState({})
- 
+function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
   const [inputText, setInputText] = useState({
     warehouse_name: "",
     address: "",
@@ -22,7 +21,6 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
       axios
         .get(`http://localhost:8080/api/warehouses/${pageToLoad}`)
         .then((response) => {
-          console.log(response.data);
           setInputText(response.data);
         })
         .catch((err) => {
@@ -44,7 +42,7 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
   const c = "component";
   return (
     <form onSubmit={handleForm} className={`${page}__form `}>
-      <section> 
+      <section>
         <article className={`${c}__article `}>
           <h2 className={`${c}__subtitle`}>Warehouse Details</h2>
 
@@ -57,6 +55,7 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
             type="text"
             onChange={handleChange}
             value={inputText.warehouse_name}
+            placeholder="Warehouse Name"
           />
           <label className={`${c}__label`}>Street Address</label>
           <input
@@ -65,6 +64,7 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
             className={`${c}__input`}
             onChange={handleChange}
             value={inputText.address}
+            placeholder="Street Address"
           />
           <label className={`${c}__label`} htmlFor="city">
             City
@@ -75,6 +75,7 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
             className={`${c}__input`}
             onChange={handleChange}
             value={inputText.city}
+            placeholder="City"
           />
           <label className={`${c}__label`} htmlFor="country">
             Country
@@ -85,6 +86,7 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
             className={`${c}__input`}
             onChange={handleChange}
             value={inputText.country}
+            placeholder="Country"
           />
         </article>
         <article className={`${c}__article`}>
@@ -99,6 +101,7 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
             className={`${c}__input`}
             onChange={handleChange}
             value={inputText.contact_name}
+            placeholder="Contact Name"
           />
           <label className={`${c}__label`}>Position</label>
           <input
@@ -107,6 +110,7 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
             className={`${c}__input`}
             onChange={handleChange}
             value={inputText.contact_position}
+            placeholder="Position"
           />
           <label className={`${c}__label`}>Phone Number</label>
           <input
@@ -115,6 +119,7 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
             className={`${c}__input`}
             onChange={handleChange}
             value={inputText.contact_phone}
+            placeholder="Phone Number"
           />
           <label className={`${c}__label`}>Email</label>
           <input
@@ -123,6 +128,7 @@ function EditWarehouse({ page, buttonText, handleForm, pageToLoad }) {
             className={`${c}__input`}
             onChange={handleChange}
             value={inputText.contact_email}
+            placeholder="Email"
           />
         </article>
       </section>
