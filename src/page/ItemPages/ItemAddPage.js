@@ -1,12 +1,25 @@
 import './ItemAddPage.scss';
 import arrowBack from '../../asset/Icons/arrow_back-24px.svg';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 function AddInventoryItem() {
+  const [warehouses, setWarehouses] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${DOMAIN}:${PORT}/api/warehouses`)
+      .then(res => {
+        setWarehouses(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   const [display, setDisplay] = useState(false);
 
   const specialClass = 'input input--quantity';
@@ -50,6 +63,10 @@ function AddInventoryItem() {
       .catch(err => {
         console.error(err);
       });
+  }
+
+  if (!warehouses) {
+    return;
   }
 
   return (
@@ -139,14 +156,13 @@ function AddInventoryItem() {
                 Warehouse
                 <select name="warehouseId" className="input input--select">
                   <option value={null}>Please select</option>
-                  <option value={1}>Manhattan</option>
-                  <option value={2}>Washington</option>
-                  <option value={3}>Jersey</option>
-                  <option value={4}>SF</option>
-                  <option value={5}>Santa Monica</option>
-                  <option value={6}>Seattle</option>
-                  <option value={7}>Miami</option>
-                  <option value={8}>Boston</option>
+                  {warehouses.map(warehouse => {
+                    return (
+                      <option key={warehouse.id} value={warehouse.id}>
+                        {warehouse.warehouse_name}
+                      </option>
+                    );
+                  })}
                 </select>
               </label>
             </div>
