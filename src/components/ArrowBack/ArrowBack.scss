@@ -1,0 +1,17 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.arrow-back {
+    background-image: url("../../asset/Icons/arrow_back-24px.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 2.4rem;
+    width: 2.4rem;
+    background-color: transparent;
+    border: none;
+    margin-top: 1rem;
+    margin-right: 0.8rem;
+
+    
+}
