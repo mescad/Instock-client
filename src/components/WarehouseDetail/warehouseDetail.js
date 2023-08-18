@@ -1,7 +1,7 @@
 import "./warehouseDetail.scss";
 import { Link } from "react-router-dom";
 
-function warehouseDetail({ city, country, name, address, position, phone, email, warehouseName }) {
+function warehouseDetail({id, city, country, name, address, position, phone, email, warehouseName }) {
   return (
     <section className="details">
 
@@ -14,10 +14,10 @@ function warehouseDetail({ city, country, name, address, position, phone, email,
         </Link>
         <h1>{warehouseName}</h1>
         </div>
-
+        <Link to={`/warehouses/${id}/edit`}> 
         <button className="details__button-edit">
-          <img url="../../asset/Icons/edit-24px.svg"/>
-        </button>
+          <img alt="edit_warehouse" url="../../asset/Icons/edit-24px.svg"/>
+        </button></Link>
       </section>
 
 

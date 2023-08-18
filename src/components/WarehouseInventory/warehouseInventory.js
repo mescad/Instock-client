@@ -2,26 +2,29 @@ import "./warehouseInventory.scss";
 import { Link } from "react-router-dom";
 import chevronIcon from "../../asset/Icons/chevron_right-24px.svg";
 
-function warehouseInventory({ id, name, status, quantity, category, tableSetting }) {
-  console.log(status);
-
+function WarehouseInventory({
+  id,
+  name,
+  status,
+  quantity,
+  category,
+  tableSetting,
+}) {
   return (
     <section className="item">
       <div className="item__wrapper">
-        
         <section className="item__section item__section-left">
           <div className="item__group item__group-1">
             <h4 className="item__label"> {tableSetting[0].name}</h4>
 
-          <Link to={`/inventories/${id}`} className="item__name-wrapper">  
-            <p className="item__name">{name} </p>
-            <img
-								src={chevronIcon}
-								alt="Go to warehouse details"
-								className="warehouse__go-to-icon"
-							/>
-              </Link>
-
+            <Link to={`/inventories/${id}`} className="item__name-wrapper">
+              <p className="item__name">{name} </p>
+              <img
+                src={chevronIcon}
+                alt="Go to warehouse details"
+                className="warehouse__go-to-icon"
+              />
+            </Link>
           </div>
 
           <div className="item__group item__group-2">
@@ -35,7 +38,9 @@ function warehouseInventory({ id, name, status, quantity, category, tableSetting
             <h4 className="item__label"> {tableSetting[2].name} </h4>
             <div
               className={
-                status === "In Stock" ? "item__status-green" : "item__status-red"
+                status === "In Stock"
+                  ? "item__status-green"
+                  : "item__status-red"
               }
             >
               {" "}
@@ -52,21 +57,20 @@ function warehouseInventory({ id, name, status, quantity, category, tableSetting
           </div>
 
           <div className="item__group item__group-4">
-            <h4 className="item__label">  {tableSetting[3].name}</h4>
+            <h4 className="item__label"> {tableSetting[3].name}</h4>
             <p> {quantity}</p>
           </div>
         </section>
-
       </div>
 
       <div className="item__buttongroup">
         <button className="item__buttongroup--delete"></button>
-        <Link to={`/inventories/${id}/edit`}> 
-        <button className="item__buttongroup--edit"></button>
+        <Link to={`/inventories/${id}/edit`}>
+          <button className="item__buttongroup--edit"></button>
         </Link>
       </div>
     </section>
   );
 }
 
-export default warehouseInventory;
+export default WarehouseInventory;

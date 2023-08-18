@@ -6,6 +6,8 @@ import axios from "axios";
 import "./Wdetail.scss";
 import WInventoryHeader from "../../components/WInventoryHeader/WInventoryHeader";
 
+
+
 function WDetail() {
   const [currentWarehouse, setCurrentWarehouse] = useState(null);
   const [currentInventory, setCurrentInventory] = useState(null);
@@ -29,6 +31,11 @@ function WDetail() {
 			width: "23%",
 		},
 	];
+
+ 
+
+
+
 	
 
 
@@ -76,6 +83,7 @@ function WDetail() {
         warehouseName={currentWarehouse.warehouse_name}
         city={currentWarehouse.city}
         country={currentWarehouse.country}
+        id={currentWarehouse.id}
       />
 
        <div className="wdetail__sorter"> 
