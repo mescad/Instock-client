@@ -76,7 +76,7 @@ function WarehouseListItem({
           </button>
         </Link>
       </div>
-      ;
+      
     </article>
   );
 }
