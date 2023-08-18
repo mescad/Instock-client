@@ -1,0 +1,40 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+
+.details__button-edit-tablet {
+  display: none;
+  background-color: $primary-alternative;
+  width: 100%;
+  height: 3.6rem;
+  padding: 0.8rem;
+  gap: 1rem;
+  align-items: center;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  margin: 0;
+ 
+
+ 
+  
+
+  @include tablet {
+    display: flex;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    // background-image: url("../../asset/Icons/edit-24px-white.svg");
+
+    background-position:left;
+    background-repeat: no-repeat;
+    &:hover {
+        background-color: blue;
+      }
+  }
+}

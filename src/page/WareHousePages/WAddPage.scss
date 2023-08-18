@@ -1,12 +1,18 @@
 @use '../../styles/partials/mixins' as *;
 @use '../../styles/partials/variables' as *;
 
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+
+
 .add-new-warehouse {
     display: flex;
     flex-direction: column;
     
     border-radius: 4px;
-    margin: 1.6rem 1.6rem;
+    
 
     &__title {
         font-size: 2.4rem;
