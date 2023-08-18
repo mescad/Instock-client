@@ -41,7 +41,7 @@ function App() {
                     element={<WAddPage action="post" />}
                   />
                   <Route
-                    path="/inventories/item/:itemId"
+                    path="/inventories/:itemId"
                     element={<ItemDetailPage />}
                   />
                 </Routes>
