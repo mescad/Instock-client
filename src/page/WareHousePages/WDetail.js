@@ -6,44 +6,39 @@ import axios from "axios";
 import "./Wdetail.scss";
 import WInventoryHeader from "../../components/WInventoryHeader/WInventoryHeader";
 
-
-
 function WDetail() {
   const [currentWarehouse, setCurrentWarehouse] = useState(null);
   const [currentInventory, setCurrentInventory] = useState(null);
   const [isLoadingDetails, setIsLoadingDetails] = useState(true);
   const [isLoadingInventory, setIsLoadingInventory] = useState(true);
   const tableSetting = [
-		{
-			name: "INVENTORY ITEM",
-			width: "30%",
-		},
-		{
-			name: "CATEGORY",
-			width: "20%",
-		},
-		{
-			name: "STATUS",
-			width: "27%",
-		},
-		{
-			name: "QUANTITY",
-			width: "23%",
-		},
-	];
-
- 
+    {
+      name: "INVENTORY ITEM",
+      width: "30%",
+    },
+    {
+      name: "CATEGORY",
+      width: "20%",
+    },
+    {
+      name: "STATUS",
+      width: "27%",
+    },
+    {
+      name: "QUANTITY",
+      width: "23%",
+    },
+  ];
 
 
 
-	
-
-
-  const params = useParams();
-
-  useEffect(() => {
+  const [displayDeleteModal, setDisplayDeleteModal] = useState([]); // set state for delete modal
+  const refreshTableFunc = () => {
+    // refactor useeffect api as a function so that can be pass down to refresh data
     axios
-      .get(`http://localhost:8080/api/warehouses/${params.id}`)
+      .get(
+        `${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_PORT}/api/warehouses/${params.id}`
+      )
       .then((response) => {
         setCurrentWarehouse(response.data);
         setIsLoadingDetails(false);
@@ -51,12 +46,11 @@ function WDetail() {
       .catch((error) => {
         console.log(error);
       });
-      // eslint-disable-next-line
-  },[]);
 
-  useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/warehouses/${params.id}/inventories`)
+      .get(
+        `${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_PORT}/api/warehouses/${params.id}/inventories`
+      )
       .then((response) => {
         setCurrentInventory(response.data);
         setIsLoadingInventory(false);
@@ -64,8 +58,15 @@ function WDetail() {
       .catch((error) => {
         console.log(error);
       });
-      // eslint-disable-next-line
-  },[]);
+  };
+
+  useEffect(() => {
+    // refactor useeffect to use refresh table function
+    refreshTableFunc();
+    //eslint-disable-next-line
+  }, []);
+
+  const params = useParams();
 
   if (isLoadingDetails || isLoadingInventory) {
     return <h1> Checking pages</h1>;
@@ -86,8 +87,8 @@ function WDetail() {
         id={currentWarehouse.id}
       />
 
-       <div className="wdetail__sorter"> 
-      <WInventoryHeader tableSetting={tableSetting}/>
+      <div className="wdetail__sorter">
+        <WInventoryHeader tableSetting={tableSetting} />
       </div>
 
       {currentInventory.map((item) => {
@@ -100,9 +101,13 @@ function WDetail() {
             status={item.status}
             quantity={item.quantity}
             tableSetting={tableSetting}
+            refreshTableFunc={refreshTableFunc}
+            setDisplayDeleteModal={setDisplayDeleteModal}
           />
         );
       })}
+
+      {displayDeleteModal.map((deleteModal) => deleteModal)}
     </section>
   );
 }
