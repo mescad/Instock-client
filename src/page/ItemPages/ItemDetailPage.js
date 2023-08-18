@@ -34,14 +34,14 @@ function ItemDetailPage() {
         <h1 className={`${page}__title`}>{`${item.item_name}`}</h1>
       </div>
       <section className={`${page}__section`}>
-        <article className={`${page}__first-article`}>
+        <article className={`${page}__article-first`}>
           <h4 className={`${page}__subtitle`}>item description</h4>
           <p className={`${page}__paragraph`}>{`${item.description}`}</p>
           <h4 className={`${page}__subtitle`}>category</h4>
           <p className={`${page}__paragraph`}>{`${item.category}`}</p>
         </article>
-        <article className={`${page}__second-article`}>
-          <div className={`${page}__wrapper`}>
+        <article className={`${page}__article-second`}>
+          <div className={`${page}__wrapper-bottom`}>
             <div className={`${page}__wrapper-status`}>
               <h4 className={`${page}__subtitle`}>status</h4>
               <p
