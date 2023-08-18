@@ -56,6 +56,8 @@ function WHomePage() {
 					</Link>
 				</div>
 			</section>
+
+			
 			<section className="warehouse-list">
 				<section className="warehouse-list__table-header">
 					<TableHeader tableSetting={tableSetting} />
