@@ -41,11 +41,21 @@ function ItemDetailPage() {
           <p className={`${page}__paragraph`}>{`${item.category}`}</p>
         </article>
         <article className={`${page}__second-article`}>
-          <div>
-            <h4 className={`${page}__subtitle`}>status</h4>
-            <p className={`${page}__paragraph`}>{`${item.status}`}</p>
-            <h4 className={`${page}__subtitle`}>quantity</h4>
-            <p className={`${page}__paragraph`}>{`${item.quantity}`}</p>
+          <div className={`${page}__wrapper`}>
+            <div className={`${page}__wrapper-status`}>
+              <h4 className={`${page}__subtitle`}>status</h4>
+              <p
+                className={
+                  item.status == "In Stock"
+                    ? `${page}__stock-green`
+                    : `${page}__stock-red`
+                }
+              >{`${item.status}`}</p>
+            </div>
+            <div className={`${page}__wrapper-quantity`}>
+              <h4 className={`${page}__subtitle`}>quantity</h4>
+              <p className={`${page}__paragraph`}>{`${item.quantity}`}</p>
+            </div>
           </div>
           <h4 className={`${page}__subtitle`}>warehouse</h4>
           <p className={`${page}__paragraph`}>{`${item.warehouse_name}`}</p>
