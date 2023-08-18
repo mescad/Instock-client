@@ -1,0 +1,49 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+
+.item {
+	&__section--left {
+		@include tablet {
+			width: 45%;
+			flex-direction: row;
+			align-items: center;
+		}
+	}
+
+	&__section--right {
+		@include tablet {
+			width: 55%;
+			flex-direction: row;
+			align-items: center;
+		}
+	}
+	&__list-group {
+		&-1 {
+			@include tablet {
+				width: 55.5%;
+			}
+		}
+		&-2 {
+			@include tablet {
+				width: 44.5%;
+			}
+		}
+		&-3 {
+			@include tablet {
+				width: 36.4%;
+			}
+		}
+		&-4 {
+			@include tablet {
+				width: 18.2%;
+			}
+		}
+        &-5 {
+			@include tablet {
+				width: 44%;
+			}
+		}
+	}
+}
