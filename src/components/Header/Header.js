@@ -7,13 +7,16 @@ function Header() {
   return (
     <header className="header">
       <div className="header-wrapper">
-        <div className="logo-wrapper">
-          <img
-            src={inStockLogo}
-            alt="brand logo"
-            className="logo-wrapper__logo"
-          />
-        </div>
+        <Link to={"/"}>
+          <div className="logo-wrapper">
+            <img
+              src={inStockLogo}
+              alt="brand logo"
+              className="logo-wrapper__logo"
+              
+            />
+          </div>
+        </Link>
         <nav className="header-nav">
           <ul className="nav-list">
             <Link className="nav-list__link">Warehouses</Link>

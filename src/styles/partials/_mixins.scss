@@ -32,7 +32,12 @@
 		font-size: 1.6rem;
 		line-height: 2.8rem;
 	}
-} 
+}
+
+@mixin centerSectionWrapper {
+	max-width: $desktop-breakpoint;
+	margin: auto;
+}
 
 @mixin topDivider {
     border-top: 1px solid #BDC5D5;
