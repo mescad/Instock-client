@@ -1,5 +1,4 @@
 import "./ItemAddPage.scss";
-import arrowBack from "../../asset/Icons/arrow_back-24px.svg";
 import axios from "axios";
 import InventoryForm from "../../components/InventoryForm/InventoryForm";
 import { useParams } from "react-router";
@@ -35,7 +34,7 @@ function ItemEditPage() {
 	return (
 		<section className="section">
 			<div className="section-title-wrapper">
-				<ArrowBack/>
+				<ArrowBack />
 				<h1 className="section-title-wrapper__title">Edit Inventory Item</h1>
 			</div>
 			<InventoryForm
