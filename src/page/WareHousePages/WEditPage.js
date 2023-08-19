@@ -4,10 +4,13 @@ import AddEditWarehouse from "../../components/AddEditWareshouse/AddEditWarehous
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import ArrowBack from "../../components/ArrowBack/ArrowBack";
+const PORT = process.env.REACT_APP_PORT;
+const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 function WEditPage({action}) {
   const [warehouse, setWarehouse] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+
+ 
 
   const {warehousesId} = useParams();
 
@@ -18,7 +21,7 @@ function WEditPage({action}) {
   const handleForm = (e) => {
     e.preventDefault();
     const ev = e.target;
-
+    console.log(e.target.body);
     if (
       !ev.warehouse_name.value ||
       !ev.address.value ||
@@ -44,13 +47,15 @@ function WEditPage({action}) {
     };
     
     axios
-      .put(`http://localhost:8080/api/warehouses/${warehousesId}`, warehouse)
+      .put(`${DOMAIN}:${PORT}/api/warehouses/${warehousesId}`, warehouse)
       .then((response) => {
         console.log(response);
       })
       .catch((err) => {
         console.log(err);
       });
+
+    
   };
 
   return (

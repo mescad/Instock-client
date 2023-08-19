@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./AddEditWarehouse.scss";
+import { useNavigate } from "react-router-dom";
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPublished, setIsPublished] = useState(false);
+
   const [inputText, setInputText] = useState({
     warehouse_name: "",
     address: "",
@@ -19,7 +25,7 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
   useEffect(() => {
     if (pageToLoad) {
       axios
-        .get(`http://localhost:8080/api/warehouses/${pageToLoad}`)
+        .get(`${DOMAIN}:${PORT}/api/warehouses/${pageToLoad}`)
         .then((response) => {
           setInputText(response.data);
         })
@@ -37,6 +43,11 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
       ...inputText,
       [e.target.name]: value,
     });
+  };
+
+  const handleCancel = (event) => {
+    event.preventDefault();
+    navigate("/");
   };
 
   const c = "component";
@@ -133,14 +144,19 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
         </article>
       </section>
       <section className={`${c}__button-wrapper`}>
-        <button className={`${page}__button ${c}__button--cancel`}>
+        <button
+          className={`${page}__button ${c}__button--cancel`}
+          onClick={handleCancel}
+        >
           Cancel
         </button>
         <button
           type="submit"
           className={`${page}__button ${page}__button--submit`}
+          
+          disabled={isLoading || isPublished}
         >
-          {buttonText}
+          {isLoading ? "Saving..." : isPublished ? "Saved!" : buttonText}
         </button>
       </section>
     </form>
