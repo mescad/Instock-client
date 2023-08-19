@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import "./App.scss";
 import "./styles/partials/_mixins.scss";
 import "./styles/partials/_resets.scss";
@@ -14,8 +15,10 @@ import WDetail from "./page/WareHousePages/WDetail";
 import ItemHomePage from "./page/ItemPages/ItemHomePage";
 import ItemAddPage from "./page/ItemPages/ItemAddPage";
 import ItemEditPage from "./page/ItemPages/ItemEditPage";
+import NotFoundPage from "./page/NotFoundPage/NotFoundPage";
 
 function App() {
+  const [notificationModal, setNotificationModal] = useState([])
   return (
     <BrowserRouter>
       <div className="page__wrapper">
@@ -49,7 +52,12 @@ function App() {
                     path="/inventories/:itemId/edit"
                     element={<ItemEditPage/>}
                   />
+                  <Route
+                    path="*"
+                    element={<NotFoundPage setNotificationModal={setNotificationModal}/>}
+                  />
                 </Routes>
+                {notificationModal.map(modal=>modal)}
               </div>
             </div>
           </main>
