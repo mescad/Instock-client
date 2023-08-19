@@ -9,20 +9,18 @@
 	}
 
 	&__side-wrapper {
-		width: 95%;
-		margin-left: auto;
-		margin-right: auto;
-		padding: 1rem;
+		padding: 1.6rem 2.4rem;
 
 		@include tablet {
-			margin-top: 2rem;
-			margin-bottom: 2rem;
-			padding: 1rem 2rem;
+			width: 100%;
+			padding: 2.4rem 3.2rem;
 		}
 
 		&--border {
+			@include topDivider;
 			@include tablet {
-				border-right: 1px solid $secondary-alternative;
+				border-top: none;
+				border-left: 1px solid $secondary-alternative;
 			}
 		}
 	}
@@ -35,55 +33,51 @@
 	}
 
 	&__button-wrapper {
-		margin-top: 3rem;
 		display: flex;
-		justify-content: space-between;
-		padding: 0 1rem 3rem 1rem;
+        padding: 1.6rem 2.4rem;
 		background-color: $background-light;
+        column-gap: 1.7rem;
 
 		@include tablet {
+            padding: 1.6rem 3.2rem;
 			justify-content: end;
-			margin-top: 0;
-			padding-bottom: 0;
+            justify-content: flex-end;
 		}
 	}
 
 	&__title {
+		margin-bottom: 2.4rem;
+
 		@include tablet {
-			margin-bottom: 3rem;
-			margin-top: 2rem;
+			margin-bottom: 3.2rem;
 		}
 	}
 
-	&__subtitle {
-		font-size: 1.6rem;
-		font-weight: 500;
-		margin-bottom: 0.5rem;
-		padding-left: 0.25rem;
-	}
-
 	&__input {
-
-        &-wrapper{
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-            
-            @include tablet {
-                margin-bottom: 2rem;
-            }
-        }
-        
 		display: block;
 		width: 100%;
 		border-radius: 15px;
 		height: 3rem;
-		padding-left: 1rem;
+		padding: 0rem 1rem;
 		border: 1px solid $secondary-alternative;
 		color: $secondary-main;
 
 		@include tablet {
 			height: 3.8rem;
 			border-radius: 19px;
+			padding: 0rem 1.6rem;
+		}
+
+		&-wrapper {
+			margin-bottom: 1.6rem;
+
+			@include tablet {
+				margin-bottom: 2.4rem;
+			}
+		}
+
+		&-title {
+			margin-bottom: 0.4rem;
 		}
 
 		&--select {
@@ -102,40 +96,37 @@
 			height: 10rem;
 			font-family: "TitilliumWeb";
 			resize: none;
+			padding: 1rem;
+			@include tablet {
+				padding-left: 1.6rem;
+			}
 		}
 
-        &--error{
-            border-color:$supporting-red;
-        }
+		&--error {
+			border-color: $supporting-red;
+		}
+
+		&-radio-wrapper {
+			display: flex;
+			column-gap: 0.8rem;
+			align-items: center;
+		}
 	}
 
-    &__button {
-		width: 45%;
-		height: 3.6rem;
-		margin-top: 3rem;
-		border-radius: 18px;
-		border: 1px solid #bdc5d5;
-		background-color: $primary-light;
-
-		@include tablet {
-			width: 7.2rem;
-			margin: 1.6rem 1rem;
+	&__button {
+        &--link{
+            width: 50%;
+            @include tablet{
+                width: auto
+            }
+        
+        }
+		&--confirm {
+			@include primaryBtn;
+            width: 50%
 		}
-
-		&--link {
-			text-align: center;
-			padding-top: 0.3rem;
-		}
-
-		&--blue {
-			background-color: $primary-alternative;
-			color: $primary-light;
-			border: none;
-
-			@include tablet {
-				width: 9.8rem;
-				margin-left: 1.6rem;
-			}
+        &--cancel {
+			@include secondaryBtn;
 		}
 	}
 }

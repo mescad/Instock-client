@@ -115,13 +115,17 @@ function InventoryForm({
 			}}
 		>
 			<div className="inventory-form__main-wrapper">
-				<div className="inventory-form__side-wrapper inventory-form__side-wrapper--border">
+				<div className="inventory-form__side-wrapper">
 					<h2 className="inventory-form__title">Item Details</h2>
 					<div className="inventory-form__input-wrapper">
 						<label>
-							Item Name
+							<h3 className="inventory-form__input-title">Item Name</h3>
 							<input
-								className={`inventory-form__input ${touch && !formValid.item_name.valid ? "inventory-form__input--error" : ""}`}
+								className={`inventory-form__input ${
+									touch && !formValid.item_name.valid
+										? "inventory-form__input--error"
+										: ""
+								}`}
 								name="item_name"
 								placeholder="Item Name"
 								value={formValue.item_name}
@@ -136,9 +140,13 @@ function InventoryForm({
 					</div>
 					<div className="inventory-form__input-wrapper">
 						<label>
-							Description
+							<h3 className="inventory-form__input-title">Description</h3>
 							<textarea
-								className={`inventory-form__input inventory-form__input--text-area ${touch && !formValid.description.valid ? "inventory-form__input--error" : ""}`}
+								className={`inventory-form__input inventory-form__input--text-area ${
+									touch && !formValid.description.valid
+										? "inventory-form__input--error"
+										: ""
+								}`}
 								name="description"
 								placeholder="Please enter a brief item description"
 								value={formValue.description}
@@ -153,10 +161,14 @@ function InventoryForm({
 					</div>
 					<div className="inventory-form__input-wrapper">
 						<label>
-							Category
+							<h3 className="inventory-form__input-title">Category</h3>
 							<select
 								name="category"
-								className={`inventory-form__input inventory-form__input--select ${touch && !formValid.category.valid ? "inventory-form__input--error" : ""}`}
+								className={`inventory-form__input inventory-form__input--select ${
+									touch && !formValid.category.valid
+										? "inventory-form__input--error"
+										: ""
+								}`}
 								value={formValue.category}
 								onChange={handleInputChange}
 							>
@@ -177,12 +189,12 @@ function InventoryForm({
 						</label>
 					</div>
 				</div>
-				<div className="inventory-form__side-wrapper">
+				<div className="inventory-form__side-wrapper  inventory-form__side-wrapper--border">
 					<h2 className="inventory-form__title">Item Availability</h2>
 
-					<h3 className="inventory-form__subtitle">Status</h3>
+					<h3 className="inventory-form__input-title">Status</h3>
 					<div className="inventory-form__input-wrapper inventory-form__radio-wrapper ">
-						<label>
+						<label className="inventory-form__input-radio-wrapper">
 							<input
 								onChange={handleInputChange}
 								defaultChecked={formValue.status === "In Stock"}
@@ -190,9 +202,9 @@ function InventoryForm({
 								name="status"
 								value="In Stock"
 							/>
-							In stock
+							<p className="inventory-form__input-radio-label">In stock</p>
 						</label>
-						<label>
+						<label className="inventory-form__input-radio-wrapper">
 							<input
 								onChange={handleInputChange}
 								defaultChecked={formValue.status === "Out of Stock"}
@@ -200,7 +212,7 @@ function InventoryForm({
 								name="status"
 								value="Out of Stock"
 							/>
-							Out of stock
+							<p className="inventory-form__input-radio-label">Out of stock</p>
 						</label>
 						<FormFieldError
 							fieldName="status"
@@ -211,11 +223,15 @@ function InventoryForm({
 					{formValue.status === "In Stock" && (
 						<div className="inventory-form__input-wrapper inventory-form__qty-wrapper">
 							<label>
-								Quantity
+								<h3 className="inventory-form__input-title">Quantity</h3>
 								<input
 									name="quantity"
 									type="number"
-									className={`inventory-form__input ${touch && !formValid.quantity.valid ? "inventory-form__input--error" : ""}`}
+									className={`inventory-form__input ${
+										touch && !formValid.quantity.valid
+											? "inventory-form__input--error"
+											: ""
+									}`}
 									placeholder="0"
 									value={formValue.quantity}
 									onChange={handleInputChange}
@@ -230,10 +246,14 @@ function InventoryForm({
 					)}
 					<div className="inventory-form__input-wrapper">
 						<label>
-							Warehouse
+							<h3 className="inventory-form__input-title">Warehouse</h3>
 							<select
 								name="warehouse_id"
-								className={`inventory-form__input inventory-form__input--select ${touch && !formValid.warehouse_id.valid ? "inventory-form__input--error" : ""}`}
+								className={`inventory-form__input inventory-form__input--select ${
+									touch && !formValid.warehouse_id.valid
+										? "inventory-form__input--error"
+										: ""
+								}`}
 								value={formValue.warehouse_id}
 								onChange={handleInputChange}
 							>
@@ -260,11 +280,15 @@ function InventoryForm({
 					to={"/inventories"}
 					className="inventory-form__button inventory-form__button--link"
 				>
-					Cancel
+					<button
+						className="inventory-form__button inventory-form__button--cancel"
+					>
+						Cancel
+					</button>
 				</Link>
 				<button
 					type="submit"
-					className="inventory-form__button inventory-form__button--blue"
+					className="inventory-form__button inventory-form__button--confirm"
 				>
 					{formAction === "add" ? "+ Add Item" : "Save"}
 				</button>
