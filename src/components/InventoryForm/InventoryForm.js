@@ -93,7 +93,6 @@ function InventoryForm({
 		if (name === "quantity") {
 			value = Number(value);
 		}
-        console.log(formValid)
 		setFormValue({
 			...formValue,
 			[name]: value,

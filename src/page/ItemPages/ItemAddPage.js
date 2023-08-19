@@ -3,6 +3,7 @@ import arrowBack from "../../asset/Icons/arrow_back-24px.svg";
 import axios from "axios";
 import InventoryForm from "../../components/InventoryForm/InventoryForm";
 import { useState } from "react";
+import ArrowBack from "../../components/ArrowBack/ArrowBack";
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
@@ -30,7 +31,7 @@ function ItemAddPage() {
 	return (
 		<section className="section">
 			<div className="section-title-wrapper">
-				<img className="arrow" src={arrowBack} alt="arrow pointing back" />
+				<ArrowBack/>
 				<h1 className="section-title-wrapper__title">Add New Inventory Item</h1>
 			</div>
 			<InventoryForm
