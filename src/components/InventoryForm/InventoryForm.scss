@@ -63,18 +63,24 @@
 	}
 
 	&__input {
+
+        &-wrapper{
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            @include tablet {
+                margin-bottom: 2rem;
+            }
+        }
+        
 		display: block;
 		width: 100%;
 		border-radius: 15px;
 		height: 3rem;
-		margin-top: 0.5rem;
-		margin-bottom: 0.5rem;
 		padding-left: 1rem;
 		border: 1px solid $secondary-alternative;
 		color: $secondary-main;
 
 		@include tablet {
-			margin-bottom: 2rem;
 			height: 3.8rem;
 			border-radius: 19px;
 		}
@@ -97,8 +103,8 @@
 			resize: none;
 		}
 
-        &--no-display{
-            display: none;
+        &--error{
+            border-color:$supporting-red;
         }
 	}
 
