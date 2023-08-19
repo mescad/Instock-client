@@ -27,7 +27,7 @@ function ItemEditPage({setNotificationModal}) {
 				.then((res) => {
 					setNotificationModal([
 						<ModalNotification
-						  modalTitle="New inventory item added"
+						  modalTitle="Inventory item updated"
 						  modalDescription="Click OK to return to inventory page."
 						  setNotificationModal={setNotificationModal}
 						  onCloseFunc={()=>navigate("/inventories")}
