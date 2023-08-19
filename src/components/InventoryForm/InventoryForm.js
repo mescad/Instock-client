@@ -2,11 +2,19 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./InventoryForm.scss";
-import { object } from "prop-types";
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 function InventoryForm({ formAction, handleSubmit, defaultInventoryID }) {
+	const formDefaultValue = {
+		itemName: "",
+		category: "",
+		description: "",
+		status: "In Stock",
+		quantity: 0,
+		warehouseId: "",
+	};
+	const [formValue, setFormValue] = useState(formDefaultValue);
 	const [displayRadio, setDisplayRadio] = useState(false);
 	const [warehouses, setWarehouses] = useState(null);
 	const [categories, setCategories] = useState(null);
@@ -20,23 +28,45 @@ function InventoryForm({ formAction, handleSubmit, defaultInventoryID }) {
 		.get(`${DOMAIN}:${PORT}/api/warehouses`)
 		.then((res) => res.data);
 
-	const getCategories = axios
+	const getInventories = axios
 		.get(`${DOMAIN}:${PORT}/api/inventories`)
-		.then((res) => objAryReduceUnique("category", res.data));
+		.then((res) => res.data);
 
 	useEffect(() => {
-		Promise.all([getWarehouses, getCategories]).then((res) => {
-			const [warehouseRes, categoriesRes] = res;
-			console.log(res);
-			setCategories(categoriesRes);
+		Promise.all([getWarehouses, getInventories]).then((res) => {
+			const [warehouseRes, inventoriesRes] = res;
+			setCategories(objAryReduceUnique("category", inventoriesRes));
 			setWarehouses(warehouseRes);
+			if (formAction === "edit") {
+				const inventory = inventoriesRes.find(
+					(inventory) => inventory.id === defaultInventoryID
+				);
+				const newDefaultFormValue = {
+					itemName: inventory.item_name,
+					category: inventory.category,
+					description: inventory.description,
+					status: inventory.status,
+					quantity: inventory.quantity,
+					warehouseId: warehouseRes.find(
+						(warehouse) => warehouse.warehouse_name === inventory.warehouse_name
+					)["id"],
+				};
+				setFormValue(newDefaultFormValue);
+			}
 			setIsLoading(false);
 		});
 	}, []);
 
-	function handleRadioChange() {
-		setDisplayRadio(true);
-	}
+	const handleInputChange = (e) => {
+		const { name, value, type } = e.target;
+		setFormValue({
+			...formValue,
+			[name]: value,
+		});
+		if (type === "radio") {
+			setDisplayRadio(!displayRadio);
+		}
+	};
 
 	if (isLoading) {
 		return;
@@ -58,6 +88,8 @@ function InventoryForm({ formAction, handleSubmit, defaultInventoryID }) {
 							className="inventory-form__input"
 							name="itemName"
 							placeholder="Item Name"
+							value={formValue.itemName}
+							onChange={handleInputChange}
 						/>
 					</label>
 					<label>
@@ -66,6 +98,8 @@ function InventoryForm({ formAction, handleSubmit, defaultInventoryID }) {
 							className="inventory-form__input inventory-form__input--text-area"
 							name="description"
 							placeholder="Please enter a brief item description"
+							value={formValue.description}
+							onChange={handleInputChange}
 						/>
 					</label>
 					<label>
@@ -73,12 +107,14 @@ function InventoryForm({ formAction, handleSubmit, defaultInventoryID }) {
 						<select
 							name="category"
 							className="inventory-form__input inventory-form__input--select"
+							value={formValue.category}
+							onChange={handleInputChange}
 						>
 							<option value={null}>Please select</option>
-							{categories.map((catagory, index) => {
+							{categories.map((category, index) => {
 								return (
-									<option key={index} value={catagory}>
-										{catagory}
+									<option key={index} value={category}>
+										{category}
 									</option>
 								);
 							})}
@@ -92,7 +128,8 @@ function InventoryForm({ formAction, handleSubmit, defaultInventoryID }) {
 					<div className="inventory-form__radio-wrapper">
 						<label>
 							<input
-								onChange={handleRadioChange}
+								onChange={handleInputChange}
+								defaultChecked={formValue.status === "In Stock"}
 								type="radio"
 								name="status"
 								value="In Stock"
@@ -101,7 +138,8 @@ function InventoryForm({ formAction, handleSubmit, defaultInventoryID }) {
 						</label>
 						<label>
 							<input
-								onChange={handleRadioChange}
+								onChange={handleInputChange}
+								defaultChecked={formValue.status === "Out of Stock"}
 								type="radio"
 								name="status"
 								value="Out of Stock"
@@ -109,31 +147,28 @@ function InventoryForm({ formAction, handleSubmit, defaultInventoryID }) {
 							Out of stock
 						</label>
 					</div>
-
-					<div className="inventory-form__qty-wrapper">
-						<label
-							className={
-								!displayRadio ? "inventory-form__input--no-display" : ""
-							}
-						>
-							Quantity
-							<input
-								name="quantity"
-								type="number"
-								className={
-									!displayRadio
-										? "inventory-form__input--no-display"
-										: "inventory-form__input inventory-form__input--quantity"
-								}
-								placeholder="0"
-							/>
-						</label>
-					</div>
+					{formValue.status === "In Stock" && (
+						<div className="inventory-form__qty-wrapper">
+							<label>
+								Quantity
+								<input
+									name="quantity"
+									type="number"
+									className="inventory-form__input"
+									placeholder="0"
+									value={formValue.quantity}
+									onChange={handleInputChange}
+								/>
+							</label>
+						</div>
+					)}
 					<label>
 						Warehouse
 						<select
 							name="warehouseId"
 							className="inventory-form__input inventory-form__input--select"
+							value={formValue.warehouseId}
+							onChange={handleInputChange}
 						>
 							<option value={null}>Please select</option>
 							{warehouses.map((warehouse) => {
@@ -158,7 +193,7 @@ function InventoryForm({ formAction, handleSubmit, defaultInventoryID }) {
 					type="submit"
 					className="inventory-form__button inventory-form__button--blue"
 				>
-					+ Add Item
+					{formAction === "add" ? "+ Add Item" : "Save"}
 				</button>
 			</div>
 		</form>

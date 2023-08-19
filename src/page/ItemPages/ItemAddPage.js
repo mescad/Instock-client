@@ -1,12 +1,11 @@
 import "./ItemAddPage.scss";
 import arrowBack from "../../asset/Icons/arrow_back-24px.svg";
 import axios from "axios";
-import { useState } from "react";
 import InventoryForm from "../../components/InventoryForm/InventoryForm";
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
-function AddInventoryItem() {
+function ItemAddPage() {
 	function handleSubmit(e) {
 		e.preventDefault();
 		const form = e.target;
@@ -57,4 +56,4 @@ function AddInventoryItem() {
 	);
 }
 
-export default AddInventoryItem;
+export default ItemAddPage;
