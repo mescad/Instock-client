@@ -31,7 +31,7 @@ function InventoryListItem({
     <section className="item">
       <div className="item__wrapper">
         <section className="item__section item__section--left">
-          <div className="item__group item__list-group-1">
+          <div className="item__list-group item__list-group-1">
             <h4 className="item__label"> {tableSetting[0].name}</h4>
 
             <Link to={`/inventories/${id}`} className="item__name-wrapper">
@@ -44,14 +44,14 @@ function InventoryListItem({
             </Link>
           </div>
 
-          <div className="item__group item__list-group-2">
+          <div className="item__list-group item__list-group-2">
             <h4 className="item__label"> {tableSetting[1].name} </h4>
             <p>{category}</p>
           </div>
         </section>
 
         <section className="item__section item__section--right">
-          <div className="item__group item__list-group-3">
+          <div className="item__list-group item__list-group-3">
             <h4 className="item__label"> {tableSetting[2].name} </h4>
             <div
               className={
@@ -72,11 +72,11 @@ function InventoryListItem({
             </div>
           </div>
 
-          <div className="item__group item__list-group-4">
+          <div className="item__list-group item__list-group-4">
             <h4 className="item__label"> {tableSetting[3].name}</h4>
             <p> {quantity}</p>
           </div>
-          <div className="item__group item__list-group-5">
+          <div className="item__list-group item__list-group-5">
             <h4 className="item__label"> {tableSetting[4].name}</h4>
             <p> {warehouse}</p>
           </div>
