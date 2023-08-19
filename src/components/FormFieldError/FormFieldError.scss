@@ -1,0 +1,20 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.form-field-error{
+    &__wrapper{
+        margin-top: 0.4rem;
+        display: flex;
+        align-items: center;
+    }
+
+    &__icon {
+        height: 1.5rem;
+    }
+
+    &__text{
+        @include bodySmall;
+        margin-left: 0.5rem;
+        color: $supporting-red;
+    }
+}

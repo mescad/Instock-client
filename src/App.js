@@ -12,7 +12,8 @@ import WHomePage from "./page/WareHousePages/WHomePage";
 import ItemDetailPage from "./page/ItemPages/ItemDetailPage";
 import WDetail from "./page/WareHousePages/WDetail";
 import ItemHomePage from "./page/ItemPages/ItemHomePage";
-import AddInventoryItem from "./page/ItemPages/ItemAddPage";
+import ItemAddPage from "./page/ItemPages/ItemAddPage";
+import ItemEditPage from "./page/ItemPages/ItemEditPage";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
                   <Route path="/inventories" element={<ItemHomePage />} />
                   <Route
                     path="/inventories/add"
-                    element={<AddInventoryItem />}
+                    element={<ItemAddPage />}
                   />
                   <Route
                     path="/warehouses/:warehousesId/edit"
@@ -43,6 +44,10 @@ function App() {
                   <Route
                     path="/inventories/:itemId"
                     element={<ItemDetailPage />}
+                  />
+                  <Route
+                    path="/inventories/:itemId/edit"
+                    element={<ItemEditPage/>}
                   />
                 </Routes>
               </div>
