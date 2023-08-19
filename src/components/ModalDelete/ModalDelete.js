@@ -51,7 +51,6 @@ function ModalDelete({
 				`${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_PORT}${config.apiPath}`
 			)
 			.then((res) => {
-				console.log(res);
 				refreshTableFunc();
 				closeModal();
 			})

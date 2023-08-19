@@ -3,6 +3,13 @@ import { useEffect } from "react";
 import "./Modal.scss";
 
 function Modal({title, description, buttons, closeModalFunc}){
+	
+	useEffect(() => {
+        // hide page overflow when modal on
+		document.body.style.overflow = "hidden";
+        // show page scroll again on modal unmount
+		return () => (document.body.style.overflow = "scroll");
+	}, []);
 
     return(
         <div className="modal__wrapper">
