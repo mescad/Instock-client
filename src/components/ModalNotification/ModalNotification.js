@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./ModalNotification.scss";
 import Modal from "../Modal/Modal";
 import ButtonModal from "../ButtonModal/ButtonModal";

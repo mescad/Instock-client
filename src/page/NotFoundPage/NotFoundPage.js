@@ -3,18 +3,15 @@ import { useNavigate } from "react-router";
 
 function NotFoundPage({ setNotificationModal }) {
 	const navigate = useNavigate();
-
-	const onCloseFunc = () => {
-		navigate("/");
-	};
-	return (
+	setNotificationModal([
 		<ModalNotification
-			errorTitle="Page Not Found"
-			errorDescription="Click OK back to home page..."
+			modalTitle="Page Not Found"
+			modalDescription="Click OK back to home page..."
 			setNotificationModal={setNotificationModal}
-			onCloseFunc={onCloseFunc}
-		/>
-	);
+			onCloseFunc={() => navigate("/")}
+		/>,
+	]);
+	return <></>;
 }
 
 export default NotFoundPage;
