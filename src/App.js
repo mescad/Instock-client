@@ -28,29 +28,29 @@ function App() {
             <div className="main__center-wrapper">
               <div className="main__wrapper">
                 <Routes>
-                  <Route path="/" element={<WHomePage />} />
-                  <Route path="/warehouses" element={<WHomePage />} />
-                  <Route path="/warehouses/:id" element={<WDetail />} />
-                  <Route path="/inventories" element={<ItemHomePage />} />
+                  <Route path="/" element={<WHomePage setNotificationModal={setNotificationModal}/>} />
+                  <Route path="/warehouses" element={<WHomePage setNotificationModal={setNotificationModal}/>} />
+                  <Route path="/warehouses/:id" element={<WDetail  setNotificationModal={setNotificationModal}/>} />
+                  <Route path="/inventories" element={<ItemHomePage  setNotificationModal={setNotificationModal}/>} />
                   <Route
                     path="/inventories/add"
-                    element={<ItemAddPage />}
+                    element={<ItemAddPage  setNotificationModal={setNotificationModal}/>}
                   />
                   <Route
                     path="/warehouses/:warehousesId/edit"
-                    element={<WEditPage action="put" />}
+                    element={<WEditPage action="put" setNotificationModal={setNotificationModal}/>}
                   />
                   <Route
                     path="/warehouses/add"
-                    element={<WAddPage action="post" />}
+                    element={<WAddPage action="post" setNotificationModal={setNotificationModal}/>}
                   />
                   <Route
                     path="/inventories/:itemId"
-                    element={<ItemDetailPage />}
+                    element={<ItemDetailPage  setNotificationModal={setNotificationModal}/>}
                   />
                   <Route
                     path="/inventories/:itemId/edit"
-                    element={<ItemEditPage/>}
+                    element={<ItemEditPage  setNotificationModal={setNotificationModal}/>}
                   />
                   <Route
                     path="*"
