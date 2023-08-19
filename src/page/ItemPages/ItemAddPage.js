@@ -2,44 +2,29 @@ import "./ItemAddPage.scss";
 import arrowBack from "../../asset/Icons/arrow_back-24px.svg";
 import axios from "axios";
 import InventoryForm from "../../components/InventoryForm/InventoryForm";
+import { useState } from "react";
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 function ItemAddPage() {
-	function handleSubmit(e) {
+	const [touch, setTouch] = useState(false);
+	function handleSubmit(e,formValue, formValid) {
 		e.preventDefault();
-		const form = e.target;
-
-		if (
-			!form.itemName.value ||
-			!form.category.value ||
-			!form.description.value ||
-			!form.warehouseId.value
-		) {
-			return;
+		setTouch(true);
+    if(formValue.status === "Out of stock"){
+      formValid.quantity.valid = true;
+  }
+		const validateAll = Object.entries(formValid).map(field=>field[1].valid).every((valid) => valid);
+		if (validateAll) {
+			axios
+				.post(`${DOMAIN}:${PORT}/api/inventories`, formValue)
+				.then((res) => {
+					console.log(res);
+				})
+				.catch((err) => {
+					console.error(err);
+				});
 		}
-
-		if (form.status.value === "In Stock" && !form.quantity.value) {
-			return;
-		}
-
-		const newItem = {
-			item_name: form.itemName.value,
-			category: form.category.value,
-			description: form.description.value,
-			status: form.status.value,
-			quantity: parseInt(form.quantity.value),
-			warehouse_id: parseInt(form.warehouseId.value),
-		};
-
-		axios
-			.post(`${DOMAIN}:${PORT}/api/inventories`, newItem)
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => {
-				console.error(err);
-			});
 	}
 
 	return (
@@ -51,6 +36,7 @@ function ItemAddPage() {
 			<InventoryForm
 				formAction="add"
 				handleSubmit={handleSubmit}
+        touch={touch}
 			/>
 		</section>
 	);

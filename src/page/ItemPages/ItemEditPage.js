@@ -13,6 +13,9 @@ function ItemEditPage() {
 	function handleSubmit(e,formValue, formValid) {
 		e.preventDefault();
 		setTouch(true);
+        if(formValue.status === "Out of stock"){
+            formValid.quantity.valid = true;
+        }
 		const validateAll = Object.entries(formValid).map(field=>field[1].valid).every((valid) => valid);
 		if (validateAll) {
 			axios

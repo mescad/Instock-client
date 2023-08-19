@@ -22,12 +22,12 @@ function InventoryForm({
 	};
 	const isEdit = formAction === "edit";
 	const formValidation = {
-		item_name: { valid: isEdit, error: "" },
-		category: { valid: isEdit, error: "" },
-		description: { valid: isEdit, error: "" },
-		status: { valid: isEdit, error: "" },
-		quantity: { valid: isEdit, error: "" },
-		warehouse_id: { valid: isEdit, error: "" },
+		item_name: { valid: isEdit, error: "This field is required" },
+		category: { valid: isEdit, error: "This field is required" },
+		description: { valid: isEdit, error: "This field is required" },
+		status: { valid: true, error: "" },
+		quantity: { valid: isEdit, error: "This field is required" },
+		warehouse_id: { valid: isEdit, error: "This field is required" },
 	};
 	const [formValue, setFormValue] = useState(formDefaultValue);
 	const [formValid, setFormValid] = useState(formValidation);
@@ -93,6 +93,7 @@ function InventoryForm({
 		if (name === "quantity") {
 			value = Number(value);
 		}
+        console.log(formValid)
 		setFormValue({
 			...formValue,
 			[name]: value,
