@@ -1,22 +1,19 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import TableHeader from '../../components/TableHeader/TableHeader';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ButtonAdd from '../../components/ButtonAdd/ButtonAdd';
 import InventoryListItem from '../../components/InventoryListItem/InventoryListItem';
-import './ItemHomePage.scss';
 import ModalNotification from '../../components/ModalNotification/ModalNotification';
+import SearchWithNoResult from '../../components/SearchWithNoResult/SearchWithNoResult';
+import './ItemHomePage.scss';
 
-function ItemHomePage({
-  setNotificationModal,
-  setWarehouseActive,
-  setInventoriesActive
-}) {
+function ItemHomePage({ setNotificationModal }) {
   const [inventories, setInventories] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  setWarehouseActive('nav-list__link');
-  setInventoriesActive('nav-list__link--active');
+  const search = useLocation().search;
+  const searchInput = new URLSearchParams(search).get('search_input');
   const tableSetting = [
     {
       name: 'INVENTORIES ITEM',
@@ -45,7 +42,9 @@ function ItemHomePage({
     // refactor useeffect api as a function so that can be pass down to refresh data
     axios
       .get(
-        `${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_PORT}/api/inventories`
+        `${process.env.REACT_APP_API_DOMAIN}:${
+          process.env.REACT_APP_PORT
+        }/api/inventories${searchInput ? `?s=${searchInput}` : ''}`
       )
       .then(res => {
         setIsLoading(false);
@@ -76,7 +75,7 @@ function ItemHomePage({
       <section className="heading">
         <h1 className="heading__title">Inventories</h1>
         <div className="heading__right-wrapper">
-          <SearchBar />
+          <SearchBar currentSearchInput={searchInput} />
           <Link to="/inventories/add">
             <ButtonAdd buttonText={'+ Add New Item'} />
           </Link>
@@ -102,6 +101,12 @@ function ItemHomePage({
               setDisplayDeleteModal={setDisplayDeleteModal}
             />
           ))}
+          {searchInput && inventories.length === 0 && (
+            <SearchWithNoResult
+              searchInput={searchInput}
+              searchObject="inventory item"
+            />
+          )}
         </div>
       </section>
       {displayDeleteModal.map(deleteModal => deleteModal)}
