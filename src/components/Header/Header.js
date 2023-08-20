@@ -3,7 +3,7 @@ import './Header.scss';
 import inStockLogo from '../../asset/Logo/InStock-Logo_2x.png';
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ warehouseActive, inventoriesActive }) {
   return (
     <header className="header">
       <div className="header-wrapper">
@@ -18,10 +18,10 @@ function Header() {
         </Link>
         <nav className="header-nav">
           <ul className="nav-list">
-            <Link to={'/'} className="nav-list__link">
+            <Link to={'/'} className={warehouseActive}>
               Warehouses
             </Link>
-            <Link to={'/inventories'} className="nav-list__link">
+            <Link to={'/inventories'} className={inventoriesActive}>
               Inventory
             </Link>
           </ul>
