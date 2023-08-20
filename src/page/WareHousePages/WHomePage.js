@@ -9,9 +9,16 @@ import SearchWithNoResult from '../../components/SearchWithNoResult/SearchWithNo
 import ModalNotification from '../../components/ModalNotification/ModalNotification';
 import './WHomePage.scss';
 
-function WHomePage({ setNotificationModal }) {
+function WHomePage({
+  setNotificationModal,
+  setWarehouseActive,
+  setInventoriesActive
+}) {
   const [warehouses, setWarehouses] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  setWarehouseActive('nav-list__link--active');
+  setInventoriesActive('nav-list__link');
+
   const search = useLocation().search;
   const searchInput = new URLSearchParams(search).get('search_input');
   const tableSetting = [

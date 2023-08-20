@@ -9,7 +9,13 @@ import ModalNotification from '../../components/ModalNotification/ModalNotificat
 import SearchWithNoResult from '../../components/SearchWithNoResult/SearchWithNoResult';
 import './ItemHomePage.scss';
 
-function ItemHomePage({ setNotificationModal }) {
+function ItemHomePage({
+  setNotificationModal,
+  setInventoriesActive,
+  setWarehouseActive
+}) {
+  setWarehouseActive('nav-list__link');
+  setInventoriesActive('nav-list__link--active');
   const [inventories, setInventories] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const search = useLocation().search;
