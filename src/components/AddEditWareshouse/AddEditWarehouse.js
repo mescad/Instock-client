@@ -84,6 +84,10 @@ function EditWarehouse({
     navigate("/");
   };
 
+  if (isLoading) {
+    return
+  }
+
   const c = "component";
   return (
     <form
