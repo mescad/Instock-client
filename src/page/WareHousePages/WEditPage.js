@@ -20,7 +20,7 @@ function WEditPage({ action, setNotificationModal, setWarehouseActive, setInvent
 
   const handleForm = (e, inputText, formValid) => {
     e.preventDefault();
-    const ev = e.target;
+    
     setTouch(true);
 
     const validateAll = Object.entries(formValid)

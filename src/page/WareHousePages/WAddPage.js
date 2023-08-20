@@ -21,7 +21,7 @@ function WAddPage({
 
   const handleForm = (e, inputText, formValid) => {
     e.preventDefault();
-    const target = e.target;
+    
     setTouch(true);
 
     //
