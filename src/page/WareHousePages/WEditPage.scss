@@ -29,7 +29,7 @@
     }
 
     &__title {
-        margin: 3.2rem 1.6rem 2.4rem 0 ;
+        margin: 3rem 1.6rem 2.4rem 0 ;
         font-size: 2.3rem;
 
         @include  tablet {
@@ -37,25 +37,15 @@
         }
     }
 
-    // &__subtitle {
-    //     margin: 1.6rem 0 2.4rem ;
-    //     font-size: 2rem;
-    // }
+  
 
     &__button {
-        height: 3.6rem;
-        
-        border-radius: 20px;
 
-        &--submit {
-            background-color: $primary-alternative;
-            color: $primary-light;
-            border-style: none;
+        &--submit{
 
-            @include tablet {
-                width: 6rem;
-            }
+            @include primaryBtn;
         }
+       
 
         
     }

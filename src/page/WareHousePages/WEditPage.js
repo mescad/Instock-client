@@ -1,78 +1,59 @@
-import axios from 'axios';
-import './WEditPage.scss';
-import AddEditWarehouse from '../../components/AddEditWareshouse/AddEditWarehouse.js';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import ArrowBack from '../../components/ArrowBack/ArrowBack';
-import ModalNotification from '../../components/ModalNotification/ModalNotification';
+import axios from "axios";
+import "./WEditPage.scss";
+import AddEditWarehouse from "../../components/AddEditWareshouse/AddEditWarehouse.js";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import ArrowBack from "../../components/ArrowBack/ArrowBack";
+import ModalNotification from "../../components/ModalNotification/ModalNotification";
 
-function WEditPage({
-  action,
-  setNotificationModal,
-  setWarehouseActive,
-  setInventoriesActive
-}) {
+const PORT = process.env.REACT_APP_PORT;
+const DOMAIN = process.env.REACT_APP_API_DOMAIN;
+
+function WEditPage({ action, setNotificationModal, setWarehouseActive,
+  setInventoriesActive }) {
   const navigate = useNavigate();
-  const [warehouse, setWarehouse] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  
+  const [touch, setTouch] = useState(false);
   setWarehouseActive('nav-list__link--active');
   setInventoriesActive('nav-list__link');
-
   const { warehousesId } = useParams();
 
   const pageToLoad = warehousesId ? warehousesId : false;
 
-  const handleForm = e => {
+  const handleForm = (e, inputText, formValid) => {
     e.preventDefault();
     const ev = e.target;
+    setTouch(true);
 
-    if (
-      !ev.warehouse_name.value ||
-      !ev.address.value ||
-      !ev.city.value ||
-      !ev.country.value ||
-      !ev.contact_name.value ||
-      !ev.contact_position.value ||
-      !ev.contact_phone.value ||
-      !ev.contact_email.value
-    ) {
-      return alert('Please complete all the fields!');
+    const validateAll = Object.entries(formValid)
+      .map((field) => field[1].valid)
+      .every((valid) => valid);
+
+    if (validateAll) {
+      axios
+        .put(`${DOMAIN}:${PORT}/api/warehouses/${warehousesId}`, inputText)
+        .then((response) => {
+          setNotificationModal([
+            <ModalNotification
+              modalTitle="Warehouse updated"
+              modalDescription="Click OK to return to warehouse page."
+              setNotificationModal={setNotificationModal}
+              onCloseFunc={() => navigate("/warehouses")}
+            />,
+          ]);
+        })
+        .catch((err) => {
+          console.log(err);
+          setNotificationModal([
+            <ModalNotification
+              modalTitle="Error getting warehouse data"
+              modalDescription={err.message ? err.message : ""}
+              setNotificationModal={setNotificationModal}
+            />,
+          ]);
+        });
     }
-
-    const warehouse = {
-      warehouse_name: `${ev.warehouse_name.value}`,
-      address: `${ev.address.value}`,
-      city: `${ev.city.value}`,
-      country: `${ev.country.value}`,
-      contact_name: `${ev.contact_name.value}`,
-      contact_position: `${ev.contact_position.value}`,
-      contact_phone: `${ev.contact_phone.value}`,
-      contact_email: `${ev.contact_email.value}`
-    };
-
-    axios
-      .put(`http://localhost:8080/api/warehouses/${warehousesId}`, warehouse)
-      .then(response => {
-        setNotificationModal([
-          <ModalNotification
-            modalTitle="Warehouse updated"
-            modalDescription="Click OK to return to warehouse page."
-            setNotificationModal={setNotificationModal}
-            onCloseFunc={() => navigate('/warehouses')}
-          />
-        ]);
-      })
-      .catch(err => {
-        console.log(err);
-        setNotificationModal([
-          <ModalNotification
-            modalTitle="Error getting warehouse data"
-            modalDescription={err.message ? err.message : ''}
-            setNotificationModal={setNotificationModal}
-          />
-        ]);
-      });
   };
 
   return (
@@ -88,6 +69,8 @@ function WEditPage({
           handleForm={handleForm}
           pageToLoad={pageToLoad}
           action={action}
+          touch={touch}
+
         />
       </section>
     </main>

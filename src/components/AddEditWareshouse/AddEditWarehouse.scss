@@ -64,6 +64,11 @@
         padding-left: 1.6rem;
         
         font-family: "TitilliumWeb";
+
+        &--error {
+			border-color: $supporting-red;
+		}
+
         
     }
 
@@ -87,22 +92,14 @@
     }
 
     &__button {
-        height: 3.6rem;
         
-        border-radius: 20px;
 
         
         
         &--cancel {
-            font-family: "TitilliumWeb";
-            font-size: 1.3rem;
-            background-color: $primary-light;
-            border: 1px solid $secondary-alternative;
-
-            @include tablet {
-                width: 7rem;
-                margin-right: 1.6rem;
-            }
+            @include secondaryBtn;
+            margin-right: 1rem;
+            
         }
 
     }

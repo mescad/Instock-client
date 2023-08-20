@@ -21,17 +21,18 @@
     }
 
     &__title{
-        padding: 2.4rem 0 2.4rem 0rem;
-        margin-left: 1.6rem;
-        border-bottom: 1px solid $secondary-alternative;
+        padding: 2.2rem 0 2.1rem 0;
+        font-size: 2.3rem;
 
         @include tablet {
-            margin-left: 2.4rem;
+            padding: 3rem 0 2.4rem 0;
+            font-size: 3.2rem;
         }
 
         @include desktop {
-            margin-left: 4rem;
+            font-size: 3rem;
         }
+        
     }
 
     &__subtitle {
@@ -46,6 +47,24 @@
         font-size: 1.3rem;
     }
 
+    &__wrapper-top {
+        display: flex;
+        align-items: center;
+        padding-left: 1.6rem;
+        border-bottom: 1px solid $secondary-alternative;
+        position: relative;
+
+        @include tablet {
+            padding-left: 2.4rem;
+        }
+
+        @include desktop {
+            padding-left:  4rem;   
+            
+        }
+        
+    }
+
     &__wrapper-bottom {
         display: flex;
         justify-content: space-between;
@@ -55,14 +74,14 @@
             width: 17rem;
         }
 
+        @include desktop {
+            width: 25rem;
+        }
+
         &-status {
             display: flex;
             flex-direction: column;
 
-        }
-
-        &-quantity {
-            
         }
         
     }
@@ -106,5 +125,60 @@
             }
         }
     }
+
+    &__edit-button-mobile {
+
+        background-image: url("../../asset/Icons/edit-24px-white.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+        height: 3.5rem;
+        width: 3.5rem;
+        background-color: $primary-alternative;
+        position: absolute;
+        right: 0;
+        margin-right: 2rem;
+            
+        
+        &:hover {
+            background-color: $background-dark;
+        }
+        
+        @include tablet{
+            display: none;
+        }
+    }
+
+    &__edit-button-tablet {
+        display: none;
+        &:hover {
+            background-color: $background-dark;
+        }
+        @include tablet {
+            display: block;
+            background-image: url("../../asset/Icons/edit-24px-white.svg");
+            background-position: 10px 4px;
+            background-repeat: no-repeat;
+            background-size: 2rem;
+
+            
+            color: white;
+            background-color: $primary-alternative;
+            width: 8rem;
+            height: 3rem;
+            border-radius:20px;
+            text-align: end;
+            
+            position: absolute;
+            right: 0;
+            margin-right: 2.4rem;
+            padding-right: 2rem;
+        }
+
+        @include desktop {
+            margin-right: 4rem;
+        }
+    }
+    
 }
 

@@ -1,8 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import './ItemDetailPage.scss';
-import ModalNotification from '../../components/ModalNotification/ModalNotification';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import "./ItemDetailPage.scss";
+import ArrowBack from "../../components/ArrowBack/ArrowBack";
+import { useNavigate } from "react-router-dom";
+import ModalNotification from "../../components/ModalNotification/ModalNotification";
+const PORT = process.env.REACT_APP_PORT;
+const DOMAIN = process.env.REACT_APP_API_DOMAIN;
+
+
+
 
 function ItemDetailPage({
   setNotificationModal,
@@ -13,18 +20,19 @@ function ItemDetailPage({
   setInventoriesActive('nav-list__lin--active');
 
   const { itemId } = useParams();
+  const navigate = useNavigate();
 
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const getItem = itemId => {
     axios
-      .get(`http://localhost:8080/api/inventories/${itemId}`)
-      .then(response => {
+      .get(`${DOMAIN}:${PORT}/api/inventories/${itemId}`)
+      .then((response) => {
         setItem(response.data[0]);
         setIsLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setNotificationModal([
           <ModalNotification
             modalTitle="Error getting inventory data"
@@ -39,7 +47,11 @@ function ItemDetailPage({
     getItem(itemId);
   }, [itemId]);
 
-  const page = 'itemDetailPage';
+  const redirect = () => {
+    navigate(`/inventories/${itemId}/edit`);
+  };
+
+  const page = "itemDetailPage";
 
   if (isLoading) {
     return;
@@ -47,8 +59,17 @@ function ItemDetailPage({
 
   return (
     <main className={`${page}`}>
-      <div>
+      <div className={`${page}__wrapper-top`}>
+        <ArrowBack />
         <h1 className={`${page}__title`}>{`${item.item_name}`}</h1>
+
+        <button
+          onClick={redirect}
+          className={`${page}__edit-button-mobile`}
+        ></button>
+        <button onClick={redirect} className={`${page}__edit-button-tablet`}>
+          Edit
+        </button>
       </div>
       <section className={`${page}__section`}>
         <article className={`${page}__article-first`}>
