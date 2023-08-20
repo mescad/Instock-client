@@ -17,8 +17,6 @@ function WDetail({
   const [isLoadingDetails, setIsLoadingDetails] = useState(true);
   const [isLoadingInventory, setIsLoadingInventory] = useState(true);
 
-  setWarehouseActive('nav-list__link--active');
-  setInventoriesActive('nav-list__link');
   const tableSetting = [
     {
       name: 'INVENTORY ITEM',
@@ -77,6 +75,8 @@ function WDetail({
     // refactor useeffect to use refresh table function
     refreshTableFunc();
     //eslint-disable-next-line
+    setWarehouseActive('nav-list__link--active');
+    setInventoriesActive('nav-list__link');
   }, []);
 
   const params = useParams();

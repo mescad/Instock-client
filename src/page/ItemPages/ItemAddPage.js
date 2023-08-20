@@ -2,7 +2,7 @@ import './ItemAddPage.scss';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import InventoryForm from '../../components/InventoryForm/InventoryForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ArrowBack from '../../components/ArrowBack/ArrowBack';
 import ModalNotification from '../../components/ModalNotification/ModalNotification';
 const PORT = process.env.REACT_APP_PORT;
@@ -10,14 +10,12 @@ const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 function ItemAddPage({
   setNotificationModal,
-  setWarehouseActive,
-  setInventoriesActive
+  setInventoriesActive,
+  setWarehouseActive
 }) {
   const navigate = useNavigate();
   const [touch, setTouch] = useState(false);
 
-  setWarehouseActive('nav-list__link');
-  setInventoriesActive('nav-list__link--active');
   function handleSubmit(e, formValue, formValid) {
     e.preventDefault();
     setTouch(true);
@@ -53,6 +51,11 @@ function ItemAddPage({
         });
     }
   }
+
+  useEffect(()=>{
+    setWarehouseActive('nav-list__link');
+    setInventoriesActive('nav-list__link--active');
+  },[])
 
   return (
     <section className="section">

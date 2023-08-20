@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import ModalNotification from '../../components/ModalNotification/ModalNotification';
 import { useNavigate } from 'react-router';
 
@@ -7,8 +8,11 @@ function NotFoundPage({
   setInventoriesActive
 }) {
   const navigate = useNavigate();
-  setWarehouseActive('nav-list__link');
-  setInventoriesActive('nav-list__link');
+  useEffect(()=>{
+    setWarehouseActive('nav-list__link');
+    setInventoriesActive('nav-list__link');
+  },[])
+
   setNotificationModal([
     <ModalNotification
       modalTitle="Page Not Found"

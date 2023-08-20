@@ -13,11 +13,9 @@ const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 function ItemDetailPage({
   setNotificationModal,
-  setWarehouseActive,
-  setInventoriesActive
+  setInventoriesActive,
+  setWarehouseActive
 }) {
-  setWarehouseActive('nav-list__link');
-  setInventoriesActive('nav-list__lin--active');
 
   const { itemId } = useParams();
   const navigate = useNavigate();
@@ -45,6 +43,8 @@ function ItemDetailPage({
 
   useEffect(() => {
     getItem(itemId);
+    setWarehouseActive('nav-list__link');
+    setInventoriesActive('nav-list__link--active');
   }, [itemId]);
 
   const redirect = () => {
