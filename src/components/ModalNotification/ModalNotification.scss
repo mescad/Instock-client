@@ -1,7 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.del-modal {
+.error-modal {
 	position: fixed;
 	z-index: 100;
 	top: 0;

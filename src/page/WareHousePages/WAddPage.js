@@ -1,12 +1,12 @@
 import "./WAddPage.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import AddEditWarehouse from "../../components/AddEditWareshouse/AddEditWarehouse.js";
 import ArrowBack from "../../components/ArrowBack/ArrowBack";
 import axios from "axios";
+import ModalNotification from "../../components/ModalNotification/ModalNotification";
 
-function WAddPage({action}) {
+function WAddPage({action, setNotificationModal}) {
   const navigate = useNavigate();
-
   const handleForm = (e) => {
     e.preventDefault();
     const target = e.target;
@@ -37,10 +37,23 @@ function WAddPage({action}) {
     axios
       .post("http://localhost:8080/api/warehouses", warehouse)
       .then((response) => {
-        console.log(response);
+        setNotificationModal([
+          <ModalNotification
+            modalTitle="New warehouse added"
+            modalDescription="Click OK to return to warehouse page."
+            setNotificationModal={setNotificationModal}
+            onCloseFunc={()=>navigate("/warehouses")}
+          />,
+        ]);
       })
       .catch((err) => {
-        console.log(err);
+        setNotificationModal([
+          <ModalNotification
+            modalTitle="Error getting warehouse data"
+            modalDescription={err.response.data.message ? err.response.data.message : ""}
+            setNotificationModal={setNotificationModal}
+          />,
+        ]);
       });
 
       setTimeout(() => {

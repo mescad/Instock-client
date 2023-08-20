@@ -6,8 +6,9 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import ButtonAdd from "../../components/ButtonAdd/ButtonAdd";
 import InventoryListItem from "../../components/InventoryListItem/InventoryListItem";
 import "./ItemHomePage.scss";
+import ModalNotification from "../../components/ModalNotification/ModalNotification";
 
-function ItemHomePage() {
+function ItemHomePage({setNotificationModal}) {
 	const [inventories, setInventories] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const tableSetting = [
@@ -45,7 +46,13 @@ function ItemHomePage() {
 				setInventories(res.data);
 			})
 			.catch((err) => {
-				console.error(err);
+				setNotificationModal([
+					<ModalNotification
+					  modalTitle="Error getting inventory data"
+					  modalDescription={err.message ? err.message : ""}
+					  setNotificationModal={setNotificationModal}
+					/>,
+				  ]);
 			});
 	};
 

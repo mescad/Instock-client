@@ -63,8 +63,8 @@ function WarehouseInventory({
               <h4
                 className={
                   status === "In Stock"
-                    ? "item__status-button-green"
-                    : "item__status-button-red"
+                    ? "item__status item__status-button-green"
+                    : "item__status item__status-button-red"
                 }
               >
                 {status}

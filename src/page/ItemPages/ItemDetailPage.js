@@ -5,12 +5,13 @@ import "./ItemDetailPage.scss";
 import ArrowBack from "../../components/ArrowBack/ArrowBack";
 import ButtonEditTablet from "../../components/ButtonEditTablet/buttonEditTablet";
 import { useNavigate } from "react-router-dom";
+import ModalNotification from "../../components/ModalNotification/ModalNotification";
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
-function ItemDetailPage() {
-  const navigate = useNavigate();
+function ItemDetailPage({ setNotificationModal }) {
   const { itemId } = useParams();
+  const navigate = useNavigate();
 
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +22,15 @@ function ItemDetailPage() {
       .then((response) => {
         setItem(response.data[0]);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        setNotificationModal([
+          <ModalNotification
+            modalTitle="Error getting inventory data"
+            modalDescription={err.message ? err.message : ""}
+            setNotificationModal={setNotificationModal}
+          />,
+        ]);
       });
   };
 
