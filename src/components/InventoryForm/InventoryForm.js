@@ -89,6 +89,9 @@ function InventoryForm({
 		} else if (type === "select-one" && value === "Please select") {
 			valid = false;
 			error = "This field is required";
+		} else if(type==="radio" && value==="Out of Stock") {
+			formValid.quantity.valid = true;
+			valid = true;
 		}
 		if (name === "quantity") {
 			value = Number(value);
