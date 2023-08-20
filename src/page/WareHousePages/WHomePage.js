@@ -5,11 +5,11 @@ import TableHeader from "../../components/TableHeader/TableHeader";
 import WarehouseListItem from "../../components/WarehouseListItem/WarehouseListItem";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import ButtonAdd from "../../components/ButtonAdd/ButtonAdd";
-import "./WHomePage.scss";
 import SearchWithNoResult from "../../components/SearchWithNoResult/SearchWithNoResult";
 import ModalNotification from "../../components/ModalNotification/ModalNotification";
+import "./WHomePage.scss";
 
-function WHomePage({setNotificationModal}) {
+function WHomePage({ setNotificationModal }) {
 	const [warehouses, setWarehouses] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const search = useLocation().search;
@@ -48,12 +48,12 @@ function WHomePage({setNotificationModal}) {
 			})
 			.catch((err) => {
 				setNotificationModal([
-          <ModalNotification
-            modalTitle="Error getting warehouse data"
-            modalDescription={err.message ? err.message : ""}
-            setNotificationModal={setNotificationModal}
-          />,
-        ]);
+					<ModalNotification
+						modalTitle="Error getting warehouse data"
+						modalDescription={err.message ? err.message : ""}
+						setNotificationModal={setNotificationModal}
+					/>,
+				]);
 			});
 	};
 
@@ -71,7 +71,7 @@ function WHomePage({setNotificationModal}) {
 			<section className="heading">
 				<h1 className="heading__title">Warehouses</h1>
 				<div className="heading__right-wrapper">
-					<SearchBar currentSearchInput={searchInput}/>
+					<SearchBar currentSearchInput={searchInput} />
 					<Link to="/warehouses/add">
 						<ButtonAdd buttonText={"+ Add New Warehouse"} />
 					</Link>
@@ -92,9 +92,12 @@ function WHomePage({setNotificationModal}) {
 							setDisplayDeleteModal={setDisplayDeleteModal}
 						/>
 					))}
-          {searchInput && warehouses.length === 0 && (
-            <SearchWithNoResult searchInput={searchInput} searchObject="warehouse"/>
-          )}
+					{searchInput && warehouses.length === 0 && (
+						<SearchWithNoResult
+							searchInput={searchInput}
+							searchObject="warehouse"
+						/>
+					)}
 				</div>
 			</section>
 			{displayDeleteModal.map((deleteModal) => deleteModal)}
