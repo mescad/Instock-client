@@ -8,28 +8,15 @@ import ModalNotification from "../../components/ModalNotification/ModalNotificat
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
-
 function WAddPage({ action, setNotificationModal }) {
   const [touch, setTouch] = useState(false);
 
   const navigate = useNavigate();
 
-
   const handleForm = (e, inputText, formValid) => {
     e.preventDefault();
     const target = e.target;
     setTouch(true);
-
-    const warehouse = {
-      warehouse_name: `${target.warehouse_name.value}`,
-      address: `${target.address.value}`,
-      city: `${target.city.value}`,
-      country: `${target.country.value}`,
-      contact_name: `${target.contact_name.value}`,
-      contact_position: `${target.contact_position.value}`,
-      contact_phone: `${target.contact_phone.value}`,
-      contact_email: `${target.contact_email.value}`,
-    };
 
     //
 
@@ -41,7 +28,7 @@ function WAddPage({ action, setNotificationModal }) {
 
     if (validateAll) {
       axios
-        .post(`${DOMAIN}:${PORT}/api/warehouses`, warehouse)
+        .post(`${DOMAIN}:${PORT}/api/warehouses`, inputText)
         .then((response) => {
           setNotificationModal([
             <ModalNotification

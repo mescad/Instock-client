@@ -87,12 +87,13 @@
     }
 
     &__button {
-      
+        
 
         
         
         &--cancel {
             @include secondaryBtn;
+            margin-right: 1rem;
             
         }
 

@@ -20,60 +20,39 @@ function WEditPage({ action, setNotificationModal }) {
 
   const pageToLoad = warehousesId ? warehousesId : false;
 
-  const handleForm = (e) => {
+  const handleForm = (e, inputText, formValid) => {
     e.preventDefault();
     const ev = e.target;
-    console.log(e.target.body);
-    if (
-      !ev.warehouse_name.value ||
-      !ev.address.value ||
-      !ev.city.value ||
-      !ev.country.value ||
-      !ev.contact_name.value ||
-      !ev.contact_position.value ||
-      !ev.contact_phone.value ||
-      !ev.contact_email.value
-    ) {
-      return alert("Please complete all the fields!");
+    setTouch(true);
+
+    const validateAll = Object.entries(formValid)
+      .map((field) => field[1].valid)
+      .every((valid) => valid);
+
+    if (validateAll) {
+      axios
+        .put(`${DOMAIN}:${PORT}/api/warehouses/${warehousesId}`, inputText)
+        .then((response) => {
+          setNotificationModal([
+            <ModalNotification
+              modalTitle="Warehouse updated"
+              modalDescription="Click OK to return to warehouse page."
+              setNotificationModal={setNotificationModal}
+              onCloseFunc={() => navigate("/warehouses")}
+            />,
+          ]);
+        })
+        .catch((err) => {
+          console.log(err);
+          setNotificationModal([
+            <ModalNotification
+              modalTitle="Error getting warehouse data"
+              modalDescription={err.message ? err.message : ""}
+              setNotificationModal={setNotificationModal}
+            />,
+          ]);
+        });
     }
-
-    const warehouse = {
-      warehouse_name: `${ev.warehouse_name.value}`,
-      address: `${ev.address.value}`,
-      city: `${ev.city.value}`,
-      country: `${ev.country.value}`,
-      contact_name: `${ev.contact_name.value}`,
-      contact_position: `${ev.contact_position.value}`,
-      contact_phone: `${ev.contact_phone.value}`,
-      contact_email: `${ev.contact_email.value}`,
-    };
-
-    axios
-      .put(`${DOMAIN}:${PORT}/api/warehouses/${warehousesId}`, warehouse)
-      .then((response) => {
-        setNotificationModal([
-          <ModalNotification
-            modalTitle="Warehouse updated"
-            modalDescription="Click OK to return to warehouse page."
-            setNotificationModal={setNotificationModal}
-            onCloseFunc={() => navigate("/warehouses")}
-          />,
-        ]);
-      })
-      .catch((err) => {
-        console.log(err);
-        setNotificationModal([
-          <ModalNotification
-            modalTitle="Error getting warehouse data"
-            modalDescription={err.message ? err.message : ""}
-            setNotificationModal={setNotificationModal}
-          />,
-        ]);
-      });
-
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
   };
 
   return (
@@ -90,6 +69,7 @@ function WEditPage({ action, setNotificationModal }) {
           pageToLoad={pageToLoad}
           action={action}
           touch={touch}
+
         />
       </section>
     </main>

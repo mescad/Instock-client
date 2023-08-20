@@ -14,6 +14,8 @@ function EditWarehouse({
   pageToLoad,
   touch,
 }) {
+
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   
@@ -43,6 +45,7 @@ function EditWarehouse({
 
   const [inputText, setInputText] = useState({inputDefaultValue})
   const [formValid, setFormValid] = useState(formValidation);
+  
 
   useEffect(() => {
     if (pageToLoad) {
@@ -50,10 +53,12 @@ function EditWarehouse({
         .get(`${DOMAIN}:${PORT}/api/warehouses/${pageToLoad}`)
         .then((response) => {
           setInputText(response.data);
+          setIsLoading(false);
         })
         .catch((err) => {
           console.log(err);
         });
+
     } else if (!pageToLoad) {
       return;
     }
