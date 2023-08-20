@@ -2,16 +2,23 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./AddEditWarehouse.scss";
 import { useNavigate } from "react-router-dom";
+import FormFieldError from "../FormFieldError/FormFieldError";
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
-function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
+function EditWarehouse({
+  action,
+  page,
+  buttonText,
+  handleForm,
+  pageToLoad,
+  touch,
+}) {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isPublished, setIsPublished] = useState(false);
+  
 
-  const [inputText, setInputText] = useState({
+  const inputDefaultValue = {
     warehouse_name: "",
     address: "",
     city: "",
@@ -20,7 +27,22 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
     contact_position: "",
     contact_phone: "",
     contact_email: "",
-  });
+  };
+  
+  const isEdit = action === "edit";
+  const formValidation = {
+    warehouse_name: { valid: isEdit, error: "This field is required" },
+    address: { valid: isEdit, error: "This field is required" },
+    city: { valid: isEdit, error: "This field is required" },
+    country: { valid: true, error: "" },
+    contact_name: { valid: isEdit, error: "This field is required" },
+    contact_position: { valid: isEdit, error: "This field is required" },
+    contact_phone: { valid: isEdit, error: "This field is required" },
+    contact_email: { valid: isEdit, error: "This field is required" },
+  };
+
+  const [inputText, setInputText] = useState({inputDefaultValue})
+  const [formValid, setFormValid] = useState(formValidation);
 
   useEffect(() => {
     if (pageToLoad) {
@@ -38,10 +60,22 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
   }, [pageToLoad]);
 
   const handleChange = (e) => {
-    const value = e.target.value;
+    let { name, value } = e.target;
+    let valid = true;
+    let error = "";
+
+    if (value === "" || value === undefined) {
+      valid = false;
+      error = "This field is required";
+    }
+
     setInputText({
       ...inputText,
-      [e.target.name]: value,
+      [name]: value,
+    });
+    setFormValid({
+      ...formValid,
+      [name]: { valid: valid, error: error },
     });
   };
 
@@ -52,7 +86,12 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
 
   const c = "component";
   return (
-    <form onSubmit={handleForm} className={`${page}__form `}>
+    <form
+      onSubmit={(e) => {
+        handleForm(e, inputText, formValid);
+      }}
+      className={`${page}__form `}
+    >
       <section className={`${c}__section-wrapper`}>
         <article className={`${c}__article ${c}__article-1 `}>
           <h2 className={`${c}__subtitle`}>Warehouse Details</h2>
@@ -68,6 +107,11 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
             value={inputText.warehouse_name}
             placeholder="Warehouse Name"
           />
+          <FormFieldError
+            fieldName="warehouse_name"
+            formValidation={formValid}
+            touch={touch}
+          />
           <label className={`${c}__label`}>Street Address</label>
           <input
             name="address"
@@ -76,6 +120,11 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
             onChange={handleChange}
             value={inputText.address}
             placeholder="Street Address"
+          />
+          <FormFieldError
+            fieldName="address"
+            formValidation={formValid}
+            touch={touch}
           />
           <label className={`${c}__label`} htmlFor="city">
             City
@@ -88,6 +137,11 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
             value={inputText.city}
             placeholder="City"
           />
+          <FormFieldError
+            fieldName="city"
+            formValidation={formValid}
+            touch={touch}
+          />
           <label className={`${c}__label`} htmlFor="country">
             Country
           </label>
@@ -98,6 +152,11 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
             onChange={handleChange}
             value={inputText.country}
             placeholder="Country"
+          />
+          <FormFieldError
+            fieldName="country"
+            formValidation={formValid}
+            touch={touch}
           />
         </article>
         <article className={`${c}__article ${c}__article-2`}>
@@ -114,6 +173,11 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
             value={inputText.contact_name}
             placeholder="Contact Name"
           />
+          <FormFieldError
+            fieldName="contact_name"
+            formValidation={formValid}
+            touch={touch}
+          />
           <label className={`${c}__label`}>Position</label>
           <input
             type="text"
@@ -122,6 +186,11 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
             onChange={handleChange}
             value={inputText.contact_position}
             placeholder="Position"
+          />
+          <FormFieldError
+            fieldName="contact_position"
+            formValidation={formValid}
+            touch={touch}
           />
           <label className={`${c}__label`}>Phone Number</label>
           <input
@@ -132,6 +201,11 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
             value={inputText.contact_phone}
             placeholder="Phone Number"
           />
+          <FormFieldError
+            fieldName="contact_phone"
+            formValidation={formValid}
+            touch={touch}
+          />
           <label className={`${c}__label`}>Email</label>
           <input
             type="email"
@@ -140,6 +214,11 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
             onChange={handleChange}
             value={inputText.contact_email}
             placeholder="Email"
+          />
+          <FormFieldError
+            fieldName="contact_email"
+            formValidation={formValid}
+            touch={touch}
           />
         </article>
       </section>
@@ -153,10 +232,8 @@ function EditWarehouse({ action, page, buttonText, handleForm, pageToLoad }) {
         <button
           type="submit"
           className={`${page}__button ${page}__button--submit`}
-          
-          disabled={isLoading || isPublished}
         >
-          {isLoading ? "Saving..." : isPublished ? "Saved!" : buttonText}
+          {buttonText}
         </button>
       </section>
     </form>

@@ -14,6 +14,7 @@ function WEditPage({ action, setNotificationModal }) {
   const navigate = useNavigate();
   const [warehouse, setWarehouse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [touch, setTouch] = useState(false);
 
   const { warehousesId } = useParams();
 
@@ -88,6 +89,7 @@ function WEditPage({ action, setNotificationModal }) {
           handleForm={handleForm}
           pageToLoad={pageToLoad}
           action={action}
+          touch={touch}
         />
       </section>
     </main>
