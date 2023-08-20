@@ -8,7 +8,15 @@ import ModalNotification from "../../components/ModalNotification/ModalNotificat
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
-function WAddPage({ action, setNotificationModal }) {
+function WAddPage({
+  action,
+  setNotificationModal,
+  setWarehouseActive,
+  setInventoriesActive,
+}) {
+  setWarehouseActive("nav-list__link--active");
+  setInventoriesActive("nav-list__link");
+
   const [touch, setTouch] = useState(false);
 
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import axios from "axios";
 import "./WEditPage.scss";
 import AddEditWarehouse from "../../components/AddEditWareshouse/AddEditWarehouse.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ArrowBack from "../../components/ArrowBack/ArrowBack";
@@ -10,12 +10,13 @@ import ModalNotification from "../../components/ModalNotification/ModalNotificat
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
-function WEditPage({ action, setNotificationModal }) {
+function WEditPage({ action, setNotificationModal, setWarehouseActive,
+  setInventoriesActive }) {
   const navigate = useNavigate();
-  const [warehouse, setWarehouse] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  
   const [touch, setTouch] = useState(false);
-
+  setWarehouseActive('nav-list__link--active');
+  setInventoriesActive('nav-list__link');
   const { warehousesId } = useParams();
 
   const pageToLoad = warehousesId ? warehousesId : false;
@@ -64,7 +65,7 @@ function WEditPage({ action, setNotificationModal }) {
       <section className="edit-warehouse__section">
         <AddEditWarehouse
           page={`edit-warehouse`}
-          buttonText={"Save"}
+          buttonText={'Save'}
           handleForm={handleForm}
           pageToLoad={pageToLoad}
           action={action}

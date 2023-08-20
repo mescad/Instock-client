@@ -1,37 +1,42 @@
-import WarehouseDetail from "../../components/WarehouseDetail/warehouseDetail";
-import WarehouseInventory from "../../components/WarehouseInventory/warehouseInventory";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import "./Wdetail.scss";
-import WInventoryHeader from "../../components/WInventoryHeader/WInventoryHeader";
-import ModalNotification from "../../components/ModalNotification/ModalNotification";
+import WarehouseDetail from '../../components/WarehouseDetail/warehouseDetail';
+import WarehouseInventory from '../../components/WarehouseInventory/warehouseInventory';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import './Wdetail.scss';
+import WInventoryHeader from '../../components/WInventoryHeader/WInventoryHeader';
+import ModalNotification from '../../components/ModalNotification/ModalNotification';
 
-function WDetail({setNotificationModal}) {
+function WDetail({
+  setNotificationModal,
+  setWarehouseActive,
+  setInventoriesActive
+}) {
   const [currentWarehouse, setCurrentWarehouse] = useState(null);
   const [currentInventory, setCurrentInventory] = useState(null);
   const [isLoadingDetails, setIsLoadingDetails] = useState(true);
   const [isLoadingInventory, setIsLoadingInventory] = useState(true);
+
+  setWarehouseActive('nav-list__link--active');
+  setInventoriesActive('nav-list__link');
   const tableSetting = [
     {
-      name: "INVENTORY ITEM",
-      width: "30%",
+      name: 'INVENTORY ITEM',
+      width: '30%'
     },
     {
-      name: "CATEGORY",
-      width: "20%",
+      name: 'CATEGORY',
+      width: '20%'
     },
     {
-      name: "STATUS",
-      width: "27%",
+      name: 'STATUS',
+      width: '27%'
     },
     {
-      name: "QUANTITY",
-      width: "23%",
-    },
+      name: 'QUANTITY',
+      width: '23%'
+    }
   ];
-
-
 
   const [displayDeleteModal, setDisplayDeleteModal] = useState([]); // set state for delete modal
   const refreshTableFunc = () => {
@@ -40,11 +45,11 @@ function WDetail({setNotificationModal}) {
       .get(
         `${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_PORT}/api/warehouses/${params.id}`
       )
-      .then((response) => {
+      .then(response => {
         setCurrentWarehouse(response.data);
         setIsLoadingDetails(false);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
 
@@ -52,18 +57,18 @@ function WDetail({setNotificationModal}) {
       .get(
         `${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_PORT}/api/warehouses/${params.id}/inventories`
       )
-      .then((response) => {
+      .then(response => {
         setCurrentInventory(response.data);
         setIsLoadingInventory(false);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
         setNotificationModal([
           <ModalNotification
             modalTitle="Error getting warehouse data"
-            modalDescription={error.message ? error.message : ""}
+            modalDescription={error.message ? error.message : ''}
             setNotificationModal={setNotificationModal}
-          />,
+          />
         ]);
       });
   };
@@ -99,7 +104,7 @@ function WDetail({setNotificationModal}) {
         <WInventoryHeader tableSetting={tableSetting} />
       </div>
 
-      {currentInventory.map((item) => {
+      {currentInventory.map(item => {
         return (
           <WarehouseInventory
             key={item.id}
@@ -115,7 +120,7 @@ function WDetail({setNotificationModal}) {
         );
       })}
 
-      {displayDeleteModal.map((deleteModal) => deleteModal)}
+      {displayDeleteModal.map(deleteModal => deleteModal)}
     </section>
   );
 }

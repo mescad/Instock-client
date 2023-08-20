@@ -3,20 +3,29 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./ItemDetailPage.scss";
 import ArrowBack from "../../components/ArrowBack/ArrowBack";
-import ButtonEditTablet from "../../components/ButtonEditTablet/buttonEditTablet";
 import { useNavigate } from "react-router-dom";
 import ModalNotification from "../../components/ModalNotification/ModalNotification";
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
-function ItemDetailPage({ setNotificationModal }) {
+
+
+
+function ItemDetailPage({
+  setNotificationModal,
+  setWarehouseActive,
+  setInventoriesActive
+}) {
+  setWarehouseActive('nav-list__link');
+  setInventoriesActive('nav-list__lin--active');
+
   const { itemId } = useParams();
   const navigate = useNavigate();
 
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getItem = (itemId) => {
+  const getItem = itemId => {
     axios
       .get(`${DOMAIN}:${PORT}/api/inventories/${itemId}`)
       .then((response) => {
@@ -27,9 +36,9 @@ function ItemDetailPage({ setNotificationModal }) {
         setNotificationModal([
           <ModalNotification
             modalTitle="Error getting inventory data"
-            modalDescription={err.message ? err.message : ""}
+            modalDescription={err.message ? err.message : ''}
             setNotificationModal={setNotificationModal}
-          />,
+          />
         ]);
       });
   };
@@ -75,7 +84,7 @@ function ItemDetailPage({ setNotificationModal }) {
               <h4 className={`${page}__subtitle`}>status</h4>
               <p
                 className={
-                  item.status == "In Stock"
+                  item.status == 'In Stock'
                     ? `${page}__stock-green`
                     : `${page}__stock-red`
                 }
