@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Wdetail.scss";
 import WInventoryHeader from "../../components/WInventoryHeader/WInventoryHeader";
+import ModalNotification from "../../components/ModalNotification/ModalNotification";
 
-function WDetail() {
+function WDetail({setNotificationModal}) {
   const [currentWarehouse, setCurrentWarehouse] = useState(null);
   const [currentInventory, setCurrentInventory] = useState(null);
   const [isLoadingDetails, setIsLoadingDetails] = useState(true);
@@ -57,6 +58,13 @@ function WDetail() {
       })
       .catch((error) => {
         console.log(error);
+        setNotificationModal([
+          <ModalNotification
+            modalTitle="Error getting warehouse data"
+            modalDescription={error.message ? error.message : ""}
+            setNotificationModal={setNotificationModal}
+          />,
+        ]);
       });
   };
 

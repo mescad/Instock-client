@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./ItemDetailPage.scss";
+import ModalNotification from "../../components/ModalNotification/ModalNotification";
 
-function ItemDetailPage() {
+function ItemDetailPage({setNotificationModal}) {
   const { itemId } = useParams();
 
   const [item, setItem] = useState(null);
@@ -15,7 +16,16 @@ function ItemDetailPage() {
       .then((response) => {
         setItem(response.data[0]);
         setIsLoading(false);
-      });
+      })
+      .catch((err)=>{
+        setNotificationModal([
+          <ModalNotification
+            modalTitle="Error getting inventory data"
+            modalDescription={err.message ? err.message : ""}
+            setNotificationModal={setNotificationModal}
+          />,
+        ]);
+      })
   };
 
   useEffect(() => {

@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import "./App.scss";
 import "./styles/partials/_mixins.scss";
 import "./styles/partials/_resets.scss";
@@ -14,8 +15,10 @@ import WDetail from "./page/WareHousePages/WDetail";
 import ItemHomePage from "./page/ItemPages/ItemHomePage";
 import ItemAddPage from "./page/ItemPages/ItemAddPage";
 import ItemEditPage from "./page/ItemPages/ItemEditPage";
+import NotFoundPage from "./page/NotFoundPage/NotFoundPage";
 
 function App() {
+  const [notificationModal, setNotificationModal] = useState([])
   return (
     <BrowserRouter>
       <div className="page__wrapper">
@@ -25,31 +28,36 @@ function App() {
             <div className="main__center-wrapper">
               <div className="main__wrapper">
                 <Routes>
-                  <Route path="/" element={<WHomePage />} />
-                  <Route path="/warehouses" element={<WHomePage />} />
-                  <Route path="/warehouses/:id" element={<WDetail />} />
-                  <Route path="/inventories" element={<ItemHomePage />} />
+                  <Route path="/" element={<WHomePage setNotificationModal={setNotificationModal}/>} />
+                  <Route path="/warehouses" element={<WHomePage setNotificationModal={setNotificationModal}/>} />
+                  <Route path="/warehouses/:id" element={<WDetail  setNotificationModal={setNotificationModal}/>} />
+                  <Route path="/inventories" element={<ItemHomePage  setNotificationModal={setNotificationModal}/>} />
                   <Route
                     path="/inventories/add"
-                    element={<ItemAddPage />}
+                    element={<ItemAddPage  setNotificationModal={setNotificationModal}/>}
                   />
                   <Route
                     path="/warehouses/:warehousesId/edit"
-                    element={<WEditPage action="put" />}
+                    element={<WEditPage action="put" setNotificationModal={setNotificationModal}/>}
                   />
                   <Route
                     path="/warehouses/add"
-                    element={<WAddPage action="post" />}
+                    element={<WAddPage action="post" setNotificationModal={setNotificationModal}/>}
                   />
                   <Route
                     path="/inventories/:itemId"
-                    element={<ItemDetailPage />}
+                    element={<ItemDetailPage  setNotificationModal={setNotificationModal}/>}
                   />
                   <Route
                     path="/inventories/:itemId/edit"
-                    element={<ItemEditPage/>}
+                    element={<ItemEditPage  setNotificationModal={setNotificationModal}/>}
+                  />
+                  <Route
+                    path="*"
+                    element={<NotFoundPage setNotificationModal={setNotificationModal}/>}
                   />
                 </Routes>
+                {notificationModal.map(modal=>modal)}
               </div>
             </div>
           </main>
