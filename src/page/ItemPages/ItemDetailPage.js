@@ -84,7 +84,7 @@ function ItemDetailPage({
               <h4 className={`${page}__subtitle`}>status</h4>
               <p
                 className={
-                  item.status == 'In Stock'
+                  item.status === 'In Stock'
                     ? `${page}__stock-green`
                     : `${page}__stock-red`
                 }
