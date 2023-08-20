@@ -16,8 +16,6 @@ function WHomePage({
 }) {
   const [warehouses, setWarehouses] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  setWarehouseActive('nav-list__link--active');
-  setInventoriesActive('nav-list__link');
 
   const search = useLocation().search;
   const searchInput = new URLSearchParams(search).get('search_input');
@@ -67,6 +65,8 @@ function WHomePage({
   useEffect(() => {
     // refactor useeffect to use refresh table function
     refreshTableFunc();
+    setWarehouseActive('nav-list__link--active');
+    setInventoriesActive('nav-list__link');
   }, []);
 
   if (isLoading) {

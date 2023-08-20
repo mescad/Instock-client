@@ -1,6 +1,6 @@
 import "./WAddPage.scss";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddEditWarehouse from "../../components/AddEditWareshouse/AddEditWarehouse.js";
 import ArrowBack from "../../components/ArrowBack/ArrowBack";
 import axios from "axios";
@@ -12,10 +12,8 @@ function WAddPage({
   action,
   setNotificationModal,
   setWarehouseActive,
-  setInventoriesActive,
+  setInventoriesActive
 }) {
-  setWarehouseActive("nav-list__link--active");
-  setInventoriesActive("nav-list__link");
 
   const [touch, setTouch] = useState(false);
 
@@ -60,6 +58,11 @@ function WAddPage({
         });
     }
   };
+
+  useEffect(()=>{
+    setWarehouseActive('nav-list__link--active');
+    setInventoriesActive('nav-list__link');
+  },[])
 
   const page = "add-new-warehouse";
   return (
