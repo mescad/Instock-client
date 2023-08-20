@@ -7,8 +7,9 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import ButtonAdd from "../../components/ButtonAdd/ButtonAdd";
 import "./WHomePage.scss";
 import SearchWithNoResult from "../../components/SearchWithNoResult/SearchWithNoResult";
+import ModalNotification from "../../components/ModalNotification/ModalNotification";
 
-function WHomePage() {
+function WHomePage({setNotificationModal}) {
 	const [warehouses, setWarehouses] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const search = useLocation().search;
@@ -46,7 +47,13 @@ function WHomePage() {
 				setWarehouses(res.data);
 			})
 			.catch((err) => {
-				console.error(err);
+				setNotificationModal([
+          <ModalNotification
+            modalTitle="Error getting warehouse data"
+            modalDescription={err.message ? err.message : ""}
+            setNotificationModal={setNotificationModal}
+          />,
+        ]);
 			});
 	};
 

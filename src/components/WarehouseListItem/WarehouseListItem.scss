@@ -18,6 +18,9 @@
 
     @include desktop {
 		padding: 0rem 2.3rem;
+		&:hover{
+			background-color: rgba(46, 102, 229, 0.07);
+		}
 	}
 
 	&__summary-wrapper {
@@ -91,6 +94,10 @@
 
 	&__name {
 		color: $primary-alternative;
+
+		&:hover{
+			text-decoration: underline;
+		}
 	}
 
 	&__label {

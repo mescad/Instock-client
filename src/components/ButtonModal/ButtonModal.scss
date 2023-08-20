@@ -1,0 +1,33 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.modal-btn {
+	height: 3.6rem;
+	width: calc(50vw - 1.6rem);
+	border-radius: 2rem;
+
+	@include tablet {
+		width: 7rem;
+	}
+
+	&--secondary {
+		background-color: $primary-light;
+		color: $secondary-main;
+		border: 1px solid $secondary-alternative;
+
+		&:hover {
+			color: $primary-alternative;
+			border: 1px solid $primary-alternative;
+		}
+	}
+
+	&--primary {
+		background-color: $supporting-red;
+		color: $primary-light;
+		border: 1px solid $secondary-alternative;
+
+		&:hover {
+			background-color: $primary-main;
+		}
+	}
+}

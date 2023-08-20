@@ -8,6 +8,10 @@
 	color: $primary-light;
 	border-radius: 2rem;
 
+	&:hover{
+		background-color: $primary-main;
+	}
+
 	@include tablet {
 		height: 3.8rem;
 		width: 16.8rem;

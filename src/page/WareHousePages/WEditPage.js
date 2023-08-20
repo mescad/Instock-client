@@ -2,10 +2,13 @@ import axios from "axios";
 import "./WEditPage.scss";
 import AddEditWarehouse from "../../components/AddEditWareshouse/AddEditWarehouse.js";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import ArrowBack from "../../components/ArrowBack/ArrowBack";
+import ModalNotification from "../../components/ModalNotification/ModalNotification";
 
-function WEditPage({action}) {
+function WEditPage({action, setNotificationModal}) {
+  const navigate = useNavigate();
   const [warehouse, setWarehouse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -46,10 +49,24 @@ function WEditPage({action}) {
     axios
       .put(`http://localhost:8080/api/warehouses/${warehousesId}`, warehouse)
       .then((response) => {
-        console.log(response);
+        setNotificationModal([
+          <ModalNotification
+            modalTitle="Warehouse updated"
+            modalDescription="Click OK to return to warehouse page."
+            setNotificationModal={setNotificationModal}
+            onCloseFunc={()=>navigate("/warehouses")}
+          />,
+        ]);
       })
       .catch((err) => {
         console.log(err);
+        setNotificationModal([
+          <ModalNotification
+            modalTitle="Error getting warehouse data"
+            modalDescription={err.message ? err.message : ""}
+            setNotificationModal={setNotificationModal}
+          />,
+        ]);
       });
   };
 
