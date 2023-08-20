@@ -4,11 +4,14 @@ import AddEditWarehouse from "../../components/AddEditWareshouse/AddEditWarehous
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import ArrowBack from "../../components/ArrowBack/ArrowBack";
+import { useNavigate } from "react-router-dom";
 const PORT = process.env.REACT_APP_PORT;
 const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 function WEditPage({action}) {
-  const [warehouse, setWarehouse] = useState(null);
+  const navigate = useNavigate();
+
+  
 
  
 
@@ -55,7 +58,9 @@ function WEditPage({action}) {
         console.log(err);
       });
 
-    
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
   };
 
   return (

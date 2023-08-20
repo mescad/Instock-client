@@ -44,15 +44,7 @@
 
 
         &--submit {
-            background-color: $primary-alternative;
-            color: $primary-light;
-            border-style: none;
-            font-size: 1.3rem;
-            font-family: "TitilliumWeb";
-
-            @include tablet {
-                width: 14rem;
-            }
+            @include primaryBtn;
         }
 
         

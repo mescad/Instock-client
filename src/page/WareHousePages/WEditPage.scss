@@ -37,25 +37,12 @@
         }
     }
 
-    // &__subtitle {
-    //     margin: 1.6rem 0 2.4rem ;
-    //     font-size: 2rem;
-    // }
+  
 
     &__button {
-        height: 3.6rem;
-        width:  47%;
-        border-radius: 20px;
 
-        &--submit {
-            background-color: $primary-alternative;
-            color: $primary-light;
-            border-style: none;
-
-            @include tablet {
-                width: 6rem;
-            }
-        }
+        @include primaryBtn;
+       
 
         
     }

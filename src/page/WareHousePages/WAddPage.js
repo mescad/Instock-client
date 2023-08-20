@@ -1,10 +1,12 @@
 import "./WAddPage.scss";
-
+import { useNavigate } from "react-router-dom";
 import AddEditWarehouse from "../../components/AddEditWareshouse/AddEditWarehouse.js";
 import ArrowBack from "../../components/ArrowBack/ArrowBack";
 import axios from "axios";
 
 function WAddPage({action}) {
+  const navigate = useNavigate();
+
   const handleForm = (e) => {
     e.preventDefault();
     const target = e.target;
@@ -40,6 +42,10 @@ function WAddPage({action}) {
       .catch((err) => {
         console.log(err);
       });
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
   };
 
   const page = "add-new-warehouse";
