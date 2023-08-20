@@ -14,7 +14,6 @@ function EditWarehouse({
   pageToLoad,
   touch,
 }) {
-  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   const inputDefaultValue = {
@@ -49,7 +48,6 @@ function EditWarehouse({
         .get(`${DOMAIN}:${PORT}/api/warehouses/${pageToLoad}`)
         .then((response) => {
           setInputText(response.data);
-          setIsLoading(false);
         })
         .catch((err) => {
           console.log(err);
@@ -84,9 +82,6 @@ function EditWarehouse({
     navigate("/");
   };
 
-  if (isLoading) {
-    return
-  }
 
   const c = "component";
   return (
