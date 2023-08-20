@@ -1,0 +1,13 @@
+@use "../../styles/partials/mixins" as *;
+
+.no-result{
+    height: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem 2.4rem;
+
+    @include tablet{
+        height: 25vw;
+    }
+}

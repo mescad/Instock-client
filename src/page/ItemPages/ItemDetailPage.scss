@@ -1,0 +1,184 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.itemDetailPage {
+
+    &__section {
+        padding-top: 1.6rem;
+        margin: 0 1.6rem 0 1.6rem;
+        padding-bottom: 1rem;
+
+        @include tablet {
+            display: flex;
+            padding-top: 2.4rem;
+            padding-bottom: 2.4rem;
+            margin: 0 2.4rem 0 2.4rem ;
+        }
+
+        @include desktop {
+            margin: 0 4rem 0 4rem;
+        }
+    }
+
+    &__title{
+        padding: 2.2rem 0 2.1rem 0;
+        font-size: 2.3rem;
+
+        @include tablet {
+            padding: 3rem 0 2.4rem 0;
+            font-size: 3.2rem;
+        }
+
+        @include desktop {
+            font-size: 3rem;
+        }
+        
+    }
+
+    &__subtitle {
+        color: $secondary-main;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    &__paragraph {
+        margin-bottom: 1.6rem;
+        font-size: 1.3rem;
+    }
+
+    &__wrapper-top {
+        display: flex;
+        align-items: center;
+        padding-left: 1.6rem;
+        border-bottom: 1px solid $secondary-alternative;
+        position: relative;
+
+        @include tablet {
+            padding-left: 2.4rem;
+        }
+
+        @include desktop {
+            padding-left:  4rem;   
+            
+        }
+        
+    }
+
+    &__wrapper-bottom {
+        display: flex;
+        justify-content: space-between;
+        width: 70%;
+
+        @include tablet {
+            width: 17rem;
+        }
+
+        @include desktop {
+            width: 25rem;
+        }
+
+        &-status {
+            display: flex;
+            flex-direction: column;
+
+        }
+        
+    }
+
+    &__stock {
+        
+        &-green {
+            color: $supporting-green;
+            text-align: center;
+            border-radius: 20px;
+            width: 6rem;
+            background-color: rgba(21, 132, 99, 0.07);
+            
+        }
+
+        &-red {
+            width: 8.6rem;
+            text-align: center;
+            border-radius: 20px;
+            
+            color: $supporting-red;
+            background-color: rgba(201, 69, 21, 0.07);
+        }
+
+    }
+
+    &__article {
+        &-first {
+            @include tablet {
+                width: 50%;
+                padding-right: 2.4rem;
+                border-right: 1px solid $secondary-alternative;
+
+            }
+        }
+
+        &-second {
+            @include tablet{
+                padding-left: 4rem;
+
+            }
+        }
+    }
+
+    &__edit-button-mobile {
+
+        background-image: url("../../asset/Icons/edit-24px-white.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+        height: 3.5rem;
+        width: 3.5rem;
+        background-color: $primary-alternative;
+        position: absolute;
+        right: 0;
+        margin-right: 2rem;
+            
+        
+        &:hover {
+            background-color: $background-dark;
+        }
+        
+        @include tablet{
+            display: none;
+        }
+    }
+
+    &__edit-button-tablet {
+        display: none;
+        &:hover {
+            background-color: $background-dark;
+        }
+        @include tablet {
+            display: block;
+            background-image: url("../../asset/Icons/edit-24px-white.svg");
+            background-position: 10px 4px;
+            background-repeat: no-repeat;
+            background-size: 2rem;
+
+            
+            color: white;
+            background-color: $primary-alternative;
+            width: 8rem;
+            height: 3rem;
+            border-radius:20px;
+            text-align: end;
+            
+            position: absolute;
+            right: 0;
+            margin-right: 2.4rem;
+            padding-right: 2rem;
+        }
+
+        @include desktop {
+            margin-right: 4rem;
+        }
+    }
+    
+}
+

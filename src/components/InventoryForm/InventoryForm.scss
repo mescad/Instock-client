@@ -1,0 +1,131 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.inventory-form {
+	&__main-wrapper {
+		@include tablet {
+			display: flex;
+		}
+	}
+
+	&__side-wrapper {
+		padding: 1.6rem 2.4rem;
+
+		@include tablet {
+			width: 100%;
+			padding: 2.4rem 3.2rem;
+		}
+
+		&--border {
+			@include topDivider;
+			@include tablet {
+				border-top: none;
+				border-left: 1px solid $secondary-alternative;
+			}
+		}
+	}
+
+	&__radio-wrapper {
+		display: flex;
+		justify-content: space-between;
+		width: 75%;
+		margin-bottom: 1.4rem;
+	}
+
+	&__button-wrapper {
+		display: flex;
+        padding: 1.6rem 2.4rem;
+		background-color: $background-light;
+        column-gap: 1.7rem;
+
+		@include tablet {
+            padding: 1.6rem 3.2rem;
+			justify-content: end;
+            justify-content: flex-end;
+		}
+	}
+
+	&__title {
+		margin-bottom: 2.4rem;
+
+		@include tablet {
+			margin-bottom: 3.2rem;
+		}
+	}
+
+	&__input {
+		display: block;
+		width: 100%;
+		border-radius: 15px;
+		height: 3rem;
+		padding: 0rem 1rem;
+		border: 1px solid $secondary-alternative;
+
+		@include tablet {
+			height: 3.8rem;
+			border-radius: 19px;
+			padding: 0rem 1.6rem;
+		}
+
+		&-wrapper {
+			margin-bottom: 1.6rem;
+
+			@include tablet {
+				margin-bottom: 2.4rem;
+			}
+		}
+
+		&-title {
+			margin-bottom: 0.4rem;
+		}
+
+		&--select {
+			@include tablet {
+				color: $secondary-main;
+			}
+		}
+
+		&--quantity {
+			@include desktop {
+				width: 30%;
+			}
+		}
+
+		&--text-area {
+			height: 10rem;
+			font-family: "TitilliumWeb";
+			resize: none;
+			padding: 1rem;
+			@include tablet {
+				padding-left: 1.6rem;
+			}
+		}
+
+		&--error {
+			border-color: $supporting-red;
+		}
+
+		&-radio-wrapper {
+			display: flex;
+			column-gap: 0.8rem;
+			align-items: center;
+		}
+	}
+
+	&__button {
+        &--link{
+            width: 50%;
+            @include tablet{
+                width: auto
+            }
+        
+        }
+		&--confirm {
+			@include primaryBtn;
+            width: 50%
+		}
+        &--cancel {
+			@include secondaryBtn;
+		}
+	}
+}

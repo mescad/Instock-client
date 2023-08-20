@@ -1,0 +1,55 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+
+
+.add-new-warehouse {
+    display: flex;
+    flex-direction: column;
+    
+    border-radius: 4px;
+    
+
+    &__title {
+        font-size: 2.4rem;
+        margin: 3rem 0 2.4rem 0rem ;
+        font-weight: 600;
+        
+    }
+
+    &__wrapper-title {
+        display: flex;
+        align-items: center;
+        padding-left: 1.6rem;
+        border-bottom: 1px solid $secondary-alternative;
+
+        @include tablet {
+            padding-left: 3.2rem;
+        }
+
+        @include desktop {
+            padding-left: 4rem;
+        }
+    }
+
+    &__button {
+        
+
+
+
+        &--submit {
+            
+            @include primaryBtn;
+        }
+
+        
+    }
+
+
+}
+
+// button needs to be different

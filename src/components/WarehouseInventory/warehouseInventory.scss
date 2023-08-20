@@ -1,0 +1,212 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+
+.item {
+  display: flex;
+  flex-direction: column;
+  border-top: 0.1rem solid $secondary-alternative;
+  padding: 1rem 1.6rem;
+
+
+
+	@include tablet {
+		display: flex;
+    flex-direction: row;
+		padding: 0rem 1.5rem;
+	}
+
+    @include desktop {
+		padding: 0rem 2.3rem;
+	}
+
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    @include tablet{
+      width: 85%;
+    }
+  }
+
+
+
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+  }
+
+
+
+  &__section-left{
+
+    @include tablet {
+			width: 50%;
+			flex-direction: row;
+			align-items: center;
+		}
+
+  }
+
+
+  &__section-right{
+    @include tablet {
+			width: 50%;
+			flex-direction: row;
+			align-items: center;
+		}
+  }
+
+
+
+
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem 0rem;
+    gap: 0.4rem;
+
+    @include tablet {
+			padding: 1.6rem 1.7rem;
+			width: 50%;
+		}
+
+
+    &-1{
+@include tablet{
+  width: 60%;
+}
+    }
+    &-2{
+@include tablet{
+  width: 40%;
+}
+    }
+    &-3{
+      @include tablet{
+        width: 55%;
+      }
+          }
+          &-4{
+      @include tablet{
+        width: 45%;
+      }
+          }
+  }
+  
+
+
+
+  &__label{
+    @include tablet{
+      display: none;
+    }
+  }
+
+&__name-wrapper{
+  display: flex;
+  align-items: center;
+  @include tablet{
+    display: flex;
+  }
+}
+
+&__name{
+  color: $primary-alternative;
+}
+
+
+
+
+
+
+
+
+
+
+  &__buttongroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+
+    @include tablet {
+			width: 15%;
+			justify-content: center;
+			align-items: center;
+			padding-left: 1.7rem;
+      gap: 2rem;
+		}
+    &--delete {
+      background-image: url(../../asset/Icons/delete_outline-24px.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      border: none;
+      width: 2.4rem;
+      height: 2.4rem;
+      background-color: none;
+    }
+
+    &--edit {
+      background-image: url(../../asset/Icons/edit-24px.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      border: none;
+      width: 2.4rem;
+      height: 2.4rem;
+      background-color: none;
+    }
+  }
+
+  &__status-green {
+    background-color: rgba($color: #158463, $alpha: 0.3);
+    color: white;
+    display: flex;
+    margin-right: auto;
+    border-radius: 2rem;
+    justify-content: center;
+    align-items: center;
+    height: 2.4rem;
+  }
+  &__status-red {
+    background-color: rgba($color: #c94515, $alpha: 0.3);
+    color: white;
+    display: flex;
+    margin-right: auto;
+    border-radius: 2rem;
+    height: 2.4rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__status-button-green {
+    color: #158463;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+  }
+
+  &__status-button-red {
+    color: #c94515;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+  }
+}
+
+
+.modal__element{
+
+  position: "fixed";
+  top: "50%";
+  left: "50%";
+  transform: "translate(-50%, -50%)";
+  z-index: 1000;
+  background: "white";
+  padding: "20px";
+  border: "1px solid black";
+
+}
