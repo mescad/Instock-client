@@ -40,7 +40,7 @@ function EditWarehouse({
     contact_email: { valid: isEdit, error: "This field is required" },
   };
 
-  const [inputText, setInputText] = useState({ inputDefaultValue });
+  const [inputText, setInputText] = useState(inputDefaultValue);
   const [formValid, setFormValid] = useState(formValidation);
 
   useEffect(() => {
@@ -155,6 +155,7 @@ function EditWarehouse({
           </label>
           <input
             type="text"
+            name="country"
             className={`${c}__input ${
               touch && !formValid.country.valid ? `${c}__input--error` : ""
             }`}
