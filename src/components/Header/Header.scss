@@ -66,6 +66,10 @@
       color: $secondary-alternative;
     }
 
+    &__link:hover {
+      text-decoration: underline;
+    }
+
     &__link--active {
       border-radius: 18px;
       text-decoration: none;
@@ -76,6 +80,10 @@
       padding: 0.4rem;
       background-color: $primary-main;
       color: $primary-light;
+    }
+
+    &__link--active:hover {
+      text-decoration: underline;
     }
   }
 }
