@@ -141,7 +141,7 @@
             
         
         &:hover {
-            background-color: blue;
+            background-color: $background-dark;
         }
         
         @include tablet{
@@ -151,6 +151,9 @@
 
     &__edit-button-tablet {
         display: none;
+        &:hover {
+            background-color: $background-dark;
+        }
         @include tablet {
             display: block;
             background-image: url("../../asset/Icons/edit-24px-white.svg");
