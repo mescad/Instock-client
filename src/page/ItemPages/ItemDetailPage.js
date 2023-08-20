@@ -1,38 +1,45 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import "./ItemDetailPage.scss";
-import ModalNotification from "../../components/ModalNotification/ModalNotification";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import './ItemDetailPage.scss';
+import ModalNotification from '../../components/ModalNotification/ModalNotification';
 
-function ItemDetailPage({setNotificationModal}) {
+function ItemDetailPage({
+  setNotificationModal,
+  setWarehouseActive,
+  setInventoriesActive
+}) {
+  setWarehouseActive('nav-list__link');
+  setInventoriesActive('nav-list__lin--active');
+
   const { itemId } = useParams();
 
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getItem = (itemId) => {
+  const getItem = itemId => {
     axios
       .get(`http://localhost:8080/api/inventories/${itemId}`)
-      .then((response) => {
+      .then(response => {
         setItem(response.data[0]);
         setIsLoading(false);
       })
-      .catch((err)=>{
+      .catch(err => {
         setNotificationModal([
           <ModalNotification
             modalTitle="Error getting inventory data"
-            modalDescription={err.message ? err.message : ""}
+            modalDescription={err.message ? err.message : ''}
             setNotificationModal={setNotificationModal}
-          />,
+          />
         ]);
-      })
+      });
   };
 
   useEffect(() => {
     getItem(itemId);
   }, [itemId]);
 
-  const page = "itemDetailPage";
+  const page = 'itemDetailPage';
 
   if (isLoading) {
     return;
@@ -56,7 +63,7 @@ function ItemDetailPage({setNotificationModal}) {
               <h4 className={`${page}__subtitle`}>status</h4>
               <p
                 className={
-                  item.status == "In Stock"
+                  item.status == 'In Stock'
                     ? `${page}__stock-green`
                     : `${page}__stock-red`
                 }

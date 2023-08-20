@@ -1,33 +1,39 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import TableHeader from "../../components/TableHeader/TableHeader";
-import WarehouseListItem from "../../components/WarehouseListItem/WarehouseListItem";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import ButtonAdd from "../../components/ButtonAdd/ButtonAdd";
-import "./WHomePage.scss";
-import ModalNotification from "../../components/ModalNotification/ModalNotification";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import TableHeader from '../../components/TableHeader/TableHeader';
+import WarehouseListItem from '../../components/WarehouseListItem/WarehouseListItem';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import ButtonAdd from '../../components/ButtonAdd/ButtonAdd';
+import './WHomePage.scss';
+import ModalNotification from '../../components/ModalNotification/ModalNotification';
 
-function WHomePage({setNotificationModal}) {
+function WHomePage({
+  setNotificationModal,
+  setWarehouseActive,
+  setInventoriesActive
+}) {
   const [warehouses, setWarehouses] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  setWarehouseActive('nav-list__link--active');
+  setInventoriesActive('nav-list__link');
   const tableSetting = [
     {
-      name: "WAREHOUSE",
-      width: "20%",
+      name: 'WAREHOUSE',
+      width: '20%'
     },
     {
-      name: "ADDRESS",
-      width: "20%",
+      name: 'ADDRESS',
+      width: '20%'
     },
     {
-      name: "CONTACT NAME",
-      width: "27%",
+      name: 'CONTACT NAME',
+      width: '27%'
     },
     {
-      name: "CONTACT INFORMATION",
-      width: "33%",
-    },
+      name: 'CONTACT INFORMATION',
+      width: '33%'
+    }
   ];
 
   const [displayDeleteModal, setDisplayDeleteModal] = useState([]); // set state for delete modal
@@ -37,17 +43,17 @@ function WHomePage({setNotificationModal}) {
       .get(
         `${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_PORT}/api/warehouses`
       )
-      .then((res) => {
+      .then(res => {
         setIsLoading(false);
         setWarehouses(res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         setNotificationModal([
           <ModalNotification
             modalTitle="Error getting warehouse data"
-            modalDescription={err.message ? err.message : ""}
+            modalDescription={err.message ? err.message : ''}
             setNotificationModal={setNotificationModal}
-          />,
+          />
         ]);
       });
   };
@@ -68,7 +74,7 @@ function WHomePage({setNotificationModal}) {
         <div className="heading__right-wrapper">
           <SearchBar />
           <Link to="/warehouses/add">
-            <ButtonAdd buttonText={"+ Add New Warehouse"} />
+            <ButtonAdd buttonText={'+ Add New Warehouse'} />
           </Link>
         </div>
       </section>
@@ -78,7 +84,7 @@ function WHomePage({setNotificationModal}) {
           <TableHeader tableSetting={tableSetting} />
         </section>
         <div className="warehouse__wrapper">
-          {warehouses.map((warehouse) => (
+          {warehouses.map(warehouse => (
             <WarehouseListItem // add new props to list items
               warehouse={warehouse}
               tableSetting={tableSetting}
@@ -89,7 +95,7 @@ function WHomePage({setNotificationModal}) {
           ))}
         </div>
       </section>
-      {displayDeleteModal.map((deleteModal) => deleteModal)}
+      {displayDeleteModal.map(deleteModal => deleteModal)}
     </>
   );
 }

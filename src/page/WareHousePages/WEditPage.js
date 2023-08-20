@@ -1,24 +1,29 @@
-import axios from "axios";
-import "./WEditPage.scss";
-import AddEditWarehouse from "../../components/AddEditWareshouse/AddEditWarehouse.js";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import './WEditPage.scss';
+import AddEditWarehouse from '../../components/AddEditWareshouse/AddEditWarehouse.js';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import ArrowBack from "../../components/ArrowBack/ArrowBack";
-import ModalNotification from "../../components/ModalNotification/ModalNotification";
+import ArrowBack from '../../components/ArrowBack/ArrowBack';
+import ModalNotification from '../../components/ModalNotification/ModalNotification';
 
-function WEditPage({action, setNotificationModal}) {
+function WEditPage({
+  action,
+  setNotificationModal,
+  setWarehouseActive,
+  setInventoriesActive
+}) {
   const navigate = useNavigate();
   const [warehouse, setWarehouse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  setWarehouseActive('nav-list__link--active');
+  setInventoriesActive('nav-list__link');
 
-  const {warehousesId} = useParams();
+  const { warehousesId } = useParams();
 
-  const pageToLoad = warehousesId ? warehousesId : false
+  const pageToLoad = warehousesId ? warehousesId : false;
 
-  
-
-  const handleForm = (e) => {
+  const handleForm = e => {
     e.preventDefault();
     const ev = e.target;
 
@@ -32,7 +37,7 @@ function WEditPage({action, setNotificationModal}) {
       !ev.contact_phone.value ||
       !ev.contact_email.value
     ) {
-      return alert("Please complete all the fields!");
+      return alert('Please complete all the fields!');
     }
 
     const warehouse = {
@@ -43,29 +48,29 @@ function WEditPage({action, setNotificationModal}) {
       contact_name: `${ev.contact_name.value}`,
       contact_position: `${ev.contact_position.value}`,
       contact_phone: `${ev.contact_phone.value}`,
-      contact_email: `${ev.contact_email.value}`,
+      contact_email: `${ev.contact_email.value}`
     };
-    
+
     axios
       .put(`http://localhost:8080/api/warehouses/${warehousesId}`, warehouse)
-      .then((response) => {
+      .then(response => {
         setNotificationModal([
           <ModalNotification
             modalTitle="Warehouse updated"
             modalDescription="Click OK to return to warehouse page."
             setNotificationModal={setNotificationModal}
-            onCloseFunc={()=>navigate("/warehouses")}
-          />,
+            onCloseFunc={() => navigate('/warehouses')}
+          />
         ]);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         setNotificationModal([
           <ModalNotification
             modalTitle="Error getting warehouse data"
-            modalDescription={err.message ? err.message : ""}
+            modalDescription={err.message ? err.message : ''}
             setNotificationModal={setNotificationModal}
-          />,
+          />
         ]);
       });
   };
@@ -79,7 +84,7 @@ function WEditPage({action, setNotificationModal}) {
       <section className="edit-warehouse__section">
         <AddEditWarehouse
           page={`edit-warehouse`}
-          buttonText={"Save"}
+          buttonText={'Save'}
           handleForm={handleForm}
           pageToLoad={pageToLoad}
           action={action}
