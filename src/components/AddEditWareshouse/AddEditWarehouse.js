@@ -14,11 +14,8 @@ function EditWarehouse({
   pageToLoad,
   touch,
 }) {
-
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
-  
 
   const inputDefaultValue = {
     warehouse_name: "",
@@ -30,22 +27,21 @@ function EditWarehouse({
     contact_phone: "",
     contact_email: "",
   };
-  
-  const isEdit = action === "edit";
+
+  const isEdit = action === "put";
   const formValidation = {
     warehouse_name: { valid: isEdit, error: "This field is required" },
     address: { valid: isEdit, error: "This field is required" },
     city: { valid: isEdit, error: "This field is required" },
-    country: { valid: true, error: "" },
+    country: { valid: isEdit, error: "This field is required" },
     contact_name: { valid: isEdit, error: "This field is required" },
     contact_position: { valid: isEdit, error: "This field is required" },
     contact_phone: { valid: isEdit, error: "This field is required" },
     contact_email: { valid: isEdit, error: "This field is required" },
   };
 
-  const [inputText, setInputText] = useState({inputDefaultValue})
+  const [inputText, setInputText] = useState({ inputDefaultValue });
   const [formValid, setFormValid] = useState(formValidation);
-  
 
   useEffect(() => {
     if (pageToLoad) {
@@ -58,7 +54,6 @@ function EditWarehouse({
         .catch((err) => {
           console.log(err);
         });
-
     } else if (!pageToLoad) {
       return;
     }
@@ -105,12 +100,16 @@ function EditWarehouse({
             Warehouse Name
           </label>
           <input
-            className={`${c}__input`}
             name="warehouse_name"
             type="text"
             onChange={handleChange}
             value={inputText.warehouse_name}
             placeholder="Warehouse Name"
+            className={`${c}__input ${
+              touch && !formValid.warehouse_name.valid
+                ? `${c}__input--error`
+                : ""
+            }`}
           />
           <FormFieldError
             fieldName="warehouse_name"
@@ -121,7 +120,9 @@ function EditWarehouse({
           <input
             name="address"
             type="text"
-            className={`${c}__input`}
+            className={`${c}__input ${
+              touch && !formValid.address.valid ? `${c}__input--error` : ""
+            }`}
             onChange={handleChange}
             value={inputText.address}
             placeholder="Street Address"
@@ -137,7 +138,9 @@ function EditWarehouse({
           <input
             type="text"
             name="city"
-            className={`${c}__input`}
+            className={`${c}__input ${
+              touch && !formValid.city.valid ? `${c}__input--error` : ""
+            }`}
             onChange={handleChange}
             value={inputText.city}
             placeholder="City"
@@ -152,8 +155,9 @@ function EditWarehouse({
           </label>
           <input
             type="text"
-            name="country"
-            className={`${c}__input`}
+            className={`${c}__input ${
+              touch && !formValid.country.valid ? `${c}__input--error` : ""
+            }`}
             onChange={handleChange}
             value={inputText.country}
             placeholder="Country"
@@ -173,7 +177,9 @@ function EditWarehouse({
           <input
             type="text"
             name="contact_name"
-            className={`${c}__input`}
+            className={`${c}__input ${
+              touch && !formValid.contact_name.valid ? `${c}__input--error` : ""
+            }`}
             onChange={handleChange}
             value={inputText.contact_name}
             placeholder="Contact Name"
@@ -187,7 +193,11 @@ function EditWarehouse({
           <input
             type="text"
             name="contact_position"
-            className={`${c}__input`}
+            className={`${c}__input ${
+              touch && !formValid.contact_position.valid
+                ? `${c}__input--error`
+                : ""
+            }`}
             onChange={handleChange}
             value={inputText.contact_position}
             placeholder="Position"
@@ -201,7 +211,11 @@ function EditWarehouse({
           <input
             type="text"
             name="contact_phone"
-            className={`${c}__input`}
+            className={`${c}__input ${
+              touch && !formValid.contact_phone.valid
+                ? `${c}__input--error`
+                : ""
+            }`}
             onChange={handleChange}
             value={inputText.contact_phone}
             placeholder="Phone Number"
@@ -215,7 +229,11 @@ function EditWarehouse({
           <input
             type="email"
             name="contact_email"
-            className={`${c}__input`}
+            className={`${c}__input ${
+              touch && !formValid.contact_email.valid
+                ? `${c}__input--error`
+                : ""
+            }`}
             onChange={handleChange}
             value={inputText.contact_email}
             placeholder="Email"

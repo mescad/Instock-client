@@ -64,6 +64,11 @@
         padding-left: 1.6rem;
         
         font-family: "TitilliumWeb";
+
+        &--error {
+			border-color: $supporting-red;
+		}
+
         
     }
 
